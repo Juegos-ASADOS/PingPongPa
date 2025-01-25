@@ -14,10 +14,11 @@ public class PinchoSpawner : MonoBehaviour
     [SerializeField]
     private GameObject spikePrefab;
     [SerializeField]
-    private float distanceBetweenSpikes = 3.0f;
+    private float angleBetweenSpikes = 5.0f;
 
     //Variables privadas
     private float timeSincelastSpawn = 0.0f;
+    private float lastAngle = 0.0f;
 
 
     private void Update()
@@ -28,6 +29,8 @@ public class PinchoSpawner : MonoBehaviour
         {
             //Posicion spawn
             int angle = Random.Range(0, 361);
+            while(Mathf.Abs(angle - lastAngle) < angleBetweenSpikes) angle = Random.Range(0, 361);  //Para 
+
             Vector2 spawnPosition = new Vector2(spawningRadious * Mathf.Cos(angle), spawningRadious * Mathf.Sin(angle));    //Formula matemática
 
             GameObject newSpike = Instantiate(spikePrefab, spawnPosition, Quaternion.identity);
@@ -47,6 +50,7 @@ public class PinchoSpawner : MonoBehaviour
             newSpike.GetComponent<Rigidbody2D>().AddForce(direction);
 
             timeSincelastSpawn = 0;
+            lastAngle = angle;
         }
     }
 
