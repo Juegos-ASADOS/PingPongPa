@@ -1,19 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class ParryObjects : MonoBehaviour
 {
     [SerializeField]
     GameObject shield;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Parry(CallbackContext context)
     {
-        
-    }
-
-    public void Parry()
-    {
-        shield.SetActive(true);
+        if (context.started)        //Comprobar si el boton se acaba de pulsar
+        {            
+            shield.SetActive(true);
+            Debug.Log("HOLO");
+        }
     }
 }
