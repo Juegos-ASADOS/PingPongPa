@@ -10,6 +10,7 @@ public class LeaderBoardManager : MonoBehaviour
 
     static string SCOREKEY = "SCORE_";
 
+    [SerializeField]
     List<int> leaderBoard = new List<int>();
 
     public List<int> GetElements()
@@ -22,13 +23,21 @@ public class LeaderBoardManager : MonoBehaviour
         //LoadLeaderboard();
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveLeaderBoard();
+    }
+
     public void SaveLeaderBoard()
     {
         for (int i = 0; i < numPlayersToShow; i++)
         {
             PlayerPrefs.DeleteKey(SCOREKEY + i.ToString());
         }
-        leaderBoard.RemoveRange(numPlayersToShow, 10);
+        if (leaderBoard.Count >= numPlayersToShow)
+        {
+            leaderBoard.RemoveRange(numPlayersToShow, leaderBoard.Count - numPlayersToShow - 1);
+        }
         int index = 0;
         foreach (int i in leaderBoard)
         {
@@ -44,9 +53,10 @@ public class LeaderBoardManager : MonoBehaviour
             int score = PlayerPrefs.GetInt(SCOREKEY + i.ToString(), -1);
             if (score >= 0)
             {
-                leaderBoard.Add(i);
+                leaderBoard.Add(score);
             }
         }
         leaderBoard.Sort();
+        leaderBoard.Reverse();
     }
 }

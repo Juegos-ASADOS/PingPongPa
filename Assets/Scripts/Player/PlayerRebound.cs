@@ -6,10 +6,12 @@ public class PlayerRebound : MonoBehaviour
     float reboundForce;
 
     Rigidbody2D rb;
+    PlayerController playerController;
 
     private void Start()
     {
         rb = GetComponentInParent<Rigidbody2D>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +31,7 @@ public class PlayerRebound : MonoBehaviour
                 reboundSign *= -1;
 
             rb.AddTorque(reboundForce * reboundSign);
+            playerController.StopForRebound();
         }
     }
 }
