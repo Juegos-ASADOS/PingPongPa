@@ -9,7 +9,7 @@ AnimatorController:
   m_Name: MainBubbleAnimation
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: BubbleStateChanged
+  - m_Name: BubbleBounce
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -39,10 +39,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 3027325132930858488}
-    m_Position: {x: 100, y: 40, z: 0}
+    m_Position: {x: 20, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3133136959099980202}
-    m_Position: {x: 420, y: 60, z: 0}
+    m_Position: {x: 340, y: 60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1733396273157664341}
@@ -64,7 +64,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: BubbleStateChanged
+    m_ConditionEvent: BubbleBounce
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3133136959099980202}

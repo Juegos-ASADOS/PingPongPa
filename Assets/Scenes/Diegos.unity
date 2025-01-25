@@ -154,9 +154,14 @@ MonoBehaviour:
   maxLevel: 5
   scaleObjetive: 1
   initialLevel: 2
-  actualLevel: 1
   spriteRenderer: {fileID: 0}
-  trans: {fileID: 0}
+  tr: {fileID: 0}
+  materiales:
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - {fileID: -876546973899608171, guid: f63d574838ccfb44f84acc05fed0af48, type: 3}
+  - {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &224988734
 Transform:
   m_ObjectHideFlags: 0
