@@ -60,8 +60,8 @@ public class MainPompaBehavior : MonoBehaviour
         animator = tr.GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
 
 #if DEBUG
@@ -79,7 +79,14 @@ public class MainPompaBehavior : MonoBehaviour
             playBounceAnimation();
         }
 #endif
-        float delta = Time.deltaTime;
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
+        float delta = Time.fixedDeltaTime;
 
         checkInvulnerability(delta);
 
@@ -92,7 +99,11 @@ public class MainPompaBehavior : MonoBehaviour
 
     void setMaterialByLevel()
     {
-        spriteRenderer.material = materiales[actualLevel-1];
+        
+        if (actualLevel < 1 || spriteRenderer.material != materiales[actualLevel - 1])
+            return;
+        spriteRenderer.material = materiales[actualLevel - 1];
+
     }
 
 
@@ -108,12 +119,27 @@ public class MainPompaBehavior : MonoBehaviour
                 actualLevel++;
             }
 
-            //calculate what value the bubble needs to growth or decreasse
-            float magnitude = (scaleFactor * scaleObjetive).x - tr.localScale.x;
-            magnitude = magnitude / Mathf.Abs(magnitude);
+            ////calculate what value the bubble needs to growth or decreasse
+            //float magnitude = (scaleFactor * scaleObjetive).magnitude - tr.localScale.magnitude;
+            //magnitude = magnitude / Mathf.Abs(magnitude);
 
-            //actual scale aniamtion (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
-            tr.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
+            //if (magnitude < 0)
+            //{
+            //    Debug.LogError("me cachis");
+            //}
+
+            //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
+
+
+            if (scaleFactor.magnitude * scaleObjetive < tr.localScale.magnitude)
+            {
+                tr.localScale += Vector3.one * (growSpeedSeconds * deltaTime);
+            }
+            else
+            {
+                tr.localScale = scaleFactor * scaleObjetive;
+            }
+
             OnSizeChange.Invoke(tr.localScale.y);
         }
     }
