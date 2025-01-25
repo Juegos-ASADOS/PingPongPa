@@ -8,9 +8,16 @@ public class ShieldBehaviour : MonoBehaviour
     float timeParry;
     private float timeActive;   //Tiempo falta para desactivar
 
+    PlayerIDs playerId = PlayerIDs.Null;
+
+    public void Init(PlayerIDs id)
+    {
+        playerId = id;
+    }
+
     private void Update()
     {
-        if(timeActive >=0)
+        if (timeActive >= 0)
             timeActive -= Time.deltaTime;
         else
             transform.gameObject.SetActive(false);
@@ -20,12 +27,24 @@ public class ShieldBehaviour : MonoBehaviour
     {
         if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
-            rb.linearVelocity = Vector2.zero;
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
 
-            Vector2 dir = other.transform.position - transform.position;
-            rb.AddForce(dir.normalized * forceReturn);
-            timeActive = timeParry;
+            other.GetComponent<Spike>().SetVelocity(dir.normalized * forceReturn);
+
+            other.GetComponent<PinchoParry>().hit(playerId);
+
         }
+        else if ( other.gameObject.layer == 8)
+        {
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
+            other.GetComponent<TinyBubble>().SetVelocity(dir.normalized * forceReturn);
+
+            other.GetComponent<TinyBubbleParry>().hit();
+        }
+    }
+
+    private void OnEnable()
+    {
+        timeActive = timeParry;
     }
 }

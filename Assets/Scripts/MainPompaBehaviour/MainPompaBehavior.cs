@@ -1,9 +1,13 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
+
 
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
@@ -30,44 +34,78 @@ public class MainPompaBehavior : MonoBehaviour
     private Vector3 scaleFactor;
 
     public SpriteRenderer spriteRenderer;
-    public Transform trans;
+    public Transform tr;
 
     //Invulnerability time
     float invulnerableTime = 0.5f;
     float invulnerableCountDown = 0.0f;
     bool bubbleIsInvulnerable = false;
 
+    //Animator Properties
+    Animator animator;
+
+    //array de materiales
+    public Material[] materiales;
+
+    public UnityEvent<float> OnSizeChange;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        trans = transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        tr = transform;
+        spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
-        scaleFactor = transform.localScale;
+        scaleFactor = tr.localScale;
+        materiales = new Material[maxLevel];
+        animator = tr.GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
 
 #if DEBUG
         // Debug Input Input
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             increaseBubbleOnHit(1.0f);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             decreaseToLowerLevel();
         }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            playBounceAnimation();
+        }
 #endif
-        float delta = Time.deltaTime;
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
+        float delta = Time.fixedDeltaTime;
 
         checkInvulnerability(delta);
 
         bubbleGrowth(delta);
 
+        setMaterialByLevel();
+
     }
+
+
+    void setMaterialByLevel()
+    {
+
+        if (actualLevel < 1 || spriteRenderer.material != materiales[actualLevel - 1])
+            return;
+        spriteRenderer.material = materiales[actualLevel - 1];
+
+    }
+
 
     void bubbleGrowth(float deltaTime)
     {
@@ -81,12 +119,28 @@ public class MainPompaBehavior : MonoBehaviour
                 actualLevel++;
             }
 
-            //calculate what value the bubble needs to growth or decreasse
-            float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
-            magnitude = magnitude / Mathf.Abs(magnitude);
+            ////calculate what value the bubble needs to growth or decreasse
+            //float magnitude = (scaleFactor * scaleObjetive).magnitude - tr.localScale.magnitude;
+            //magnitude = magnitude / Mathf.Abs(magnitude);
 
-            //actual scale aniamtion (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
-            trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
+            //if (magnitude < 0)
+            //{
+            //    Debug.LogError("me cachis");
+            //}
+
+            //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
+
+
+            if (scaleFactor.magnitude * scaleObjetive < tr.localScale.magnitude)
+            {
+                tr.localScale += Vector3.one * (growSpeedSeconds * deltaTime);
+            }
+            else
+            {
+                tr.localScale = scaleFactor * scaleObjetive;
+            }
+
+            OnSizeChange.Invoke(tr.localScale.y);
         }
     }
 
@@ -94,6 +148,8 @@ public class MainPompaBehavior : MonoBehaviour
     //increae the bubbble level by a percentage given by a proyectile
     void increaseBubbleOnHit(float percentageIncreased)
     {
+        if (actualLevel >= maxLevel)
+            return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
 
@@ -101,16 +157,17 @@ public class MainPompaBehavior : MonoBehaviour
 
         actualLevel = (int)(scaleObjetive / radiusLevelsInterval);
 
-        if (actualLevel >= maxLevel)
+        if (actualLevel > maxLevel)
         {
             actualLevel = maxLevel;
             scaleObjetive = actualLevel * radiusLevelsInterval;
         }
+        else
+            //Animation
+            playBounceAnimation();
 
         //increase instantly
-        trans.localScale = scaleFactor * scaleObjetive;
-
-
+        tr.localScale = scaleFactor * scaleObjetive;
 
         //actualize the bubble desired scale
 
@@ -127,11 +184,17 @@ public class MainPompaBehavior : MonoBehaviour
 
     void decreaseToLowerLevel()
     {
+        if (actualLevel <= 0)
+            return;
         actualLevel--;
         scaleObjetive = actualLevel * radiusLevelsInterval;
 
         //change scale instantly
-        trans.localScale = scaleFactor * scaleObjetive;
+        tr.localScale = scaleFactor * scaleObjetive;
+
+        if (actualLevel >= 1)
+            //Animation
+            playBounceAnimation();
     }
 
     void activateInvulnerability()
@@ -145,8 +208,36 @@ public class MainPompaBehavior : MonoBehaviour
         invulnerableCountDown -= deltaTime;
 
         if (invulnerableCountDown <= 0.0f)
-            bubbleIsInvulnerable=false;
-            
+            bubbleIsInvulnerable = false;
+
     }
 
+    void playBounceAnimation()
+    {
+        animator.SetTrigger("BubbleBounce");
+    }
+
+    public void PlayerSpawned(PlayerInput player)
+    {
+        Transform playerTr = player.transform.GetChild(0);
+
+        Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
+        playerTr.SetLocalPositionAndRotation(playerPos, playerTr.localRotation);
+
+        OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            decreaseToLowerLevel();
+            other.GetComponent<PinchoParry>().MainBubbleCollided();
+        }
+        else if(other.gameObject.layer == 8)
+        {
+            Destroy(other.gameObject);
+            increaseBubbleOnHit(1);
+        }
+    }
 }
