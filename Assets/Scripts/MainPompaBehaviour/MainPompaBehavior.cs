@@ -129,6 +129,9 @@ public class MainPompaBehavior : MonoBehaviour
             actualLevel = maxLevel;
             scaleObjetive = actualLevel * radiusLevelsInterval;
         }
+        else
+            //Animation
+            playBounceAnimation();
 
         //increase instantly
         tr.localScale = scaleFactor * scaleObjetive;
@@ -153,6 +156,9 @@ public class MainPompaBehavior : MonoBehaviour
 
         //change scale instantly
         tr.localScale = scaleFactor * scaleObjetive;
+
+        //Animation
+        playBounceAnimation();
     }
 
     void activateInvulnerability()
