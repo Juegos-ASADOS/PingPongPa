@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceReturn: 5
   timeParry: 0.5
+  cooldown: 0
 --- !u!1 &1244008585236321619
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 843365964637089924}
+  cooldown: 1
 --- !u!114 &1554646540297822491
 MonoBehaviour:
   m_ObjectHideFlags: 0
