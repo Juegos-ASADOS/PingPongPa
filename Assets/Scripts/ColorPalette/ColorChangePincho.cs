@@ -9,11 +9,17 @@ public class ColorChangePincho : MonoBehaviour
     private Gradient colorGradient;
     private ParticleSystem pSystem;
     private TrailRenderer trailRend;
-    void Start()
+    private SpriteRenderer spriteEscudo1;
+    private readonly SpriteRenderer spriteEscudo2;
+    SpriteRenderer[] _renderer;
+    void Awake()
     {
 
         pSystem = this.GetComponentInChildren<ParticleSystem>();
         trailRend = this.GetComponent<TrailRenderer>();
+        _renderer = GetComponentsInChildren<SpriteRenderer>();
+
+
     }
     public void ChangeColorPincho(int player)
     {
@@ -47,6 +53,15 @@ public class ColorChangePincho : MonoBehaviour
             var colorOverLifetime = pSystem.colorOverLifetime;
             colorOverLifetime.enabled = true;
             colorOverLifetime.color = new ParticleSystem.MinMaxGradient(colorGradient);
+        }
+        foreach(var render in _renderer)
+        {
+            Material mat = render.material;
+            if (mat && mat.HasProperty("_Color"))
+            {
+                Debug.Log("Mat property ENCONTRADO");
+                mat.SetColor("_Color", colorPincho);
+            }
         }
     }
 

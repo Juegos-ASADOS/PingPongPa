@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 55e94dcd6b18cee4a9f58f6193f74a02
+guid: 936a6cee221198e42931140edc1bcb09
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6407625475132294341
-    second: drop_0
+      213: -4355184524504624755
+    second: Pincho_escudo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drop_0
+      name: Pincho_escudo_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 46
-        width: 476
-        height: 169
+        x: 0
+        y: 0
+        width: 2021
+        height: 1668
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5c4010bab657ce850800000000000000
-      internalID: 6407625475132294341
+      spriteID: d819f9defb64f83c0800000000000000
+      internalID: -4355184524504624755
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      drop_0: 6407625475132294341
+      Pincho_escudo_0: -4355184524504624755
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
