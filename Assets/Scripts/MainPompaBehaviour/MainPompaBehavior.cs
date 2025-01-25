@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -15,8 +16,8 @@ public class MainPompaBehavior : MonoBehaviour
     //max level into wich it stop growing
     public int maxLevel = 5;
 
-    //esta es la variable que vamos a utilizar para animar y calcular el crecimineto actual
-    private float scaleObjetive = 1;
+    //this is the variable we are gonna use to animate cand calculate the actual growth
+    public float scaleObjetive = 1;
 
     public int initialLevel = 2;
 
@@ -50,35 +51,40 @@ public class MainPompaBehavior : MonoBehaviour
     {
         float delta = Time.deltaTime;
 
+        ScalarLerp a = new ScalarLerp();
 
-        //continousGrowing(delta);
+        //calculate what value the bubble needs to growth or decreasse
+        float magnitude =  (scaleFactor * scaleObjetive).x - trans.localScale.x;
+        magnitude = magnitude / Mathf.Abs(magnitude);
 
-        //trans.localScale =  scaleFactor * scaleObjetive;
+        //actual scale aniamtion
+        trans.localScale += Vector3.one * (animationGrothSpeed * delta) * magnitude;
 
     }
 
-    //void inmediateGrowing()
-    //{
-    //    if (actualLevel < maxLevel)
-    //    {
-    //        actualLevel++;
-    //        scaleObjetive = scaleLevelsInterval * actualLevel;
-    //    }
-    //}
+    void inmediateGrowing()
+    {
+       if (actualLevel < maxLevel)
+       {
+           actualLevel++;
+           scaleObjetive = scaleLevelsInterval * actualLevel;
+       }
+    }
 
-    //void continousGrowing(float deltaTime)
-    //{
-    //    if (actualLevel < maxLevel)
-    //    {
-    //        //crecimiento por tiempo
-    //        scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
+    void continousGrowing(float deltaTime)
+    {
+       if (actualLevel < maxLevel)
+       {
+           //crecimiento por tiempo
+           scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
 
-    //        if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
-    //        {
-    //            actualLevel++;
-    //        }
-    //    }
-    //}
+           if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
+           {
+               actualLevel++;
+           }
+    
+       }
+    }
 
     void increaseBubbleOnHit(float percentageIncreased)
     {
@@ -96,6 +102,7 @@ public class MainPompaBehavior : MonoBehaviour
         actualLevel--;
         levelPercentageRadius = 0.0f;
     }
+        
 
     void activateInvulnerability()
     {
