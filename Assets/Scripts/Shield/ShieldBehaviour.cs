@@ -20,13 +20,20 @@ public class ShieldBehaviour : MonoBehaviour
     {
         if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
-            rb.linearVelocity = Vector2.zero;
+            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();  //Rigidbody del pincho
+            Vector2 dir = other.transform.position - transform.position;    //Claculo del vector de exclusion
 
-            Vector2 dir = other.transform.position - transform.position;
-            rb.linearVelocity = dir.normalized * forceReturn;
+            rb.linearVelocity = dir.normalized * forceReturn;   //Nueva fuera del pincho
 
-            rb.transform.rotation.SetLookRotation(rb.linearVelocity, rb.transform.up);
+            //float angle = 0.0f;
+
+            //if(other.transform.position.x >= 0)
+            //    angle = Vector2.Angle(dir, Vector2.down);
+            //else
+            //    angle = -Vector2.Angle(dir, Vector2.down);
+
+            //rb.transform.eulerAngles = new Vector3(0,0,angle);
+
         }
     }
 
