@@ -18,7 +18,7 @@ public class ShieldBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
+        if (timeActive <= 0 && other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
             Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();  //Rigidbody del pincho
             Vector2 dir = other.transform.position - transform.position;    //Claculo del vector de exclusion
