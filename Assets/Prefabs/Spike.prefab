@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639561406378438764}
-  - component: {fileID: 1429661505604581425}
   - component: {fileID: 336489608313352239}
   - component: {fileID: 4979256500650311308}
   - component: {fileID: -1249140534031923032}
   - component: {fileID: 6001467911709157394}
+  - component: {fileID: 7546968538636256802}
   m_Layer: 6
   m_Name: Spike
   m_TagString: Untagged
@@ -36,19 +36,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &1429661505604581425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9210002571197935720}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda5c38586d586341af554b3bdb53ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneryRadius: 4.5
 --- !u!70 &336489608313352239
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +99,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-1249140534031923032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,3 +171,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7546968538636256802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9210002571197935720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3fc88791e0b5648bfe4d78df5daffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

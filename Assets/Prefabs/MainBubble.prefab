@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3365514528211640514}
   - component: {fileID: 3124881638420822597}
   - component: {fileID: 4369644749989855577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e564b9120fe0a8f44b8c82b12860a26e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6808930869444231080}
   - component: {fileID: 8166275023330524819}
   - component: {fileID: 4518639356268104061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

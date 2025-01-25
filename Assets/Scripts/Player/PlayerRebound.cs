@@ -30,7 +30,8 @@ public class PlayerRebound : MonoBehaviour
             if (Mathf.Abs(otherAngle - thisAngle) > 180)
                 reboundSign *= -1;
 
-            rb.AddTorque(reboundForce * reboundSign);
+            rb.angularVelocity = 0;
+            rb.AddTorque(reboundForce * reboundSign / transform.localPosition.y);
             playerController.StopForRebound();
         }
     }

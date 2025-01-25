@@ -43,11 +43,15 @@ public class MainPompaBehavior : MonoBehaviour
 
     //Animator Properties
     Animator animator;
-
     //array de materiales
-    public Material[] materiales;
+    private Material bubbleMaterial;
 
     public UnityEvent<float> OnSizeChange;
+
+    float actualLevelColor;
+    float nextLevelColor;
+
+    enum LevelColor { LEVEL1 = 135, LEVEL2 = 165, LEVEL3 = 230, LEVEL4 = 340, LEVEL5 = 370 }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,8 +60,9 @@ public class MainPompaBehavior : MonoBehaviour
         spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
         scaleFactor = tr.localScale;
-        materiales = new Material[maxLevel];
+        bubbleMaterial = tr.GetComponentInChildren<SpriteRenderer>().material;
         animator = tr.GetComponentInChildren<Animator>();
+        actualLevelColor = (float)LevelColor.LEVEL1;
     }
 
 
@@ -66,11 +71,11 @@ public class MainPompaBehavior : MonoBehaviour
 
 #if DEBUG
         // Debug Input Input
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             increaseBubbleOnHit(1.0f);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             decreaseToLowerLevel();
         }
@@ -79,6 +84,7 @@ public class MainPompaBehavior : MonoBehaviour
             playBounceAnimation();
         }
 #endif
+        changeColorMaterial();
     }
 
 
@@ -92,18 +98,55 @@ public class MainPompaBehavior : MonoBehaviour
 
         bubbleGrowth(delta);
 
-        setMaterialByLevel();
-
     }
 
 
-    void setMaterialByLevel()
+    void changeColorMaterial()
     {
-        
-        if (actualLevel < 1 || spriteRenderer.material != materiales[actualLevel - 1])
-            return;
-        spriteRenderer.material = materiales[actualLevel - 1];
+        //calculate from 0 to 126 (red color in Hue) from the value diference,
+        //being the scale of the bubble in the maximun level 5 the hue value 0, and 1 being 126
 
+        switch (actualLevel)
+        {
+            case 1:
+                {
+                    actualLevelColor = (float)LevelColor.LEVEL1;
+                    nextLevelColor = (float)LevelColor.LEVEL2;
+                }
+                break;
+            case 2:
+                {
+                    actualLevelColor = (float)LevelColor.LEVEL2;
+                    nextLevelColor = (float)LevelColor.LEVEL3;
+
+                }
+                break;
+            case 3:
+                {
+                    actualLevelColor = (float)LevelColor.LEVEL3;
+                    nextLevelColor = (float)LevelColor.LEVEL4;
+                }
+                break;
+            case 4:
+                {
+                    actualLevelColor = (float)LevelColor.LEVEL4;
+                    nextLevelColor = (float)LevelColor.LEVEL5;
+
+                }
+                break;
+
+            case 5:
+                {
+                    actualLevelColor = (float)LevelColor.LEVEL5;
+                    nextLevelColor = (float)LevelColor.LEVEL5;
+
+                }
+
+                break;
+        }
+
+        //Color Lerp
+        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, scaleObjetive-actualLevel));
     }
 
 
@@ -192,7 +235,7 @@ public class MainPompaBehavior : MonoBehaviour
         //change scale instantly
         tr.localScale = scaleFactor * scaleObjetive;
 
-        if(actualLevel >= 1)
+        if (actualLevel >= 1)
             //Animation
             playBounceAnimation();
     }
@@ -208,8 +251,8 @@ public class MainPompaBehavior : MonoBehaviour
         invulnerableCountDown -= deltaTime;
 
         if (invulnerableCountDown <= 0.0f)
-            bubbleIsInvulnerable=false;
-            
+            bubbleIsInvulnerable = false;
+
     }
 
     void playBounceAnimation()
@@ -229,7 +272,15 @@ public class MainPompaBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        decreaseToLowerLevel();
-        other.GetComponent<PinchoParry>().MainBubbleCollided();
+        if (other.gameObject.layer == 6)
+        {
+            decreaseToLowerLevel();
+            other.GetComponent<PinchoParry>().MainBubbleCollided();
+        }
+        else if(other.gameObject.layer == 8)
+        {
+            Destroy(other.gameObject);
+            increaseBubbleOnHit(1);
+        }
     }
 }
