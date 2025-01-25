@@ -43,7 +43,6 @@ public class PinchoSpawner : MonoBehaviour
             rotationAngle = 360 - rotationAngle;  //Porque gira del revés
             newSpike.transform.Rotate(new Vector3(0,0, rotationAngle)); //Lo pongo apuntando al centro
             newSpike.GetComponent<PinchoMovement>().setSceneryRadius(spawningRadious);
-            Debug.Log("InitRot: " + newSpike.transform.rotation);
             //direction = direction.normalized;       //Normalizamos para que no vaya más deprisa cuanto más lejos aparezca
             //direction *= spikeSpeed;    //Multiplicamos por la velocidad
 
