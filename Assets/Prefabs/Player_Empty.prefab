@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac758602d9a8ad47b63b4aedf712058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceReturn: 5
+  forceReturn: 50
   timeParry: 0.5
   cooldown: 0
 --- !u!1 &1244008585236321619

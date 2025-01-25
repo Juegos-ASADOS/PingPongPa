@@ -27,10 +27,9 @@ public class ShieldBehaviour : MonoBehaviour
     {
         if (timeActive <= 0 && other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();  //Rigidbody del pincho
-            Vector2 dir = other.transform.position - transform.position;    //Claculo del vector de exclusion
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
 
-            rb.linearVelocity = dir.normalized * forceReturn;   //Nueva fuera del pincho
+            other.GetComponent<Spike>().SetVelocity(dir.normalized * forceReturn);
 
             other.GetComponent<PinchoParry>().hit(playerId);
             //float angle = 0.0f;
