@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class MainPompaBehavior : MonoBehaviour
 {
 
+
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -21,63 +22,77 @@ public class MainPompaBehavior : MonoBehaviour
 
     public int initialLevel = 2;
 
-    int actualLevel = 1;
+    private int actualLevel = 1;
 
     //Percentage use to measure actual level radius
-    float levelPercentageRadius = 0.0f;
+    //float levelPercentageRadius = 0.0f;
 
     //this one is in case the object has an initial scale diferent to (1,1,1)
     private Vector3 scaleFactor;
 
     public SpriteRenderer spriteRenderer;
-    public Transform trans;
+    public Transform tr;
 
     //Invulnerability time
     float invulnerableTime = 0.5f;
     float invulnerableCountDown = 0.0f;
     bool bubbleIsInvulnerable = false;
 
+    //Animator Properties
+    Animator animator;
+
+    //array de materiales
+    public Material[] materiales;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        trans = transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        tr = transform;
+        spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
-        scaleFactor = transform.localScale;
+        scaleFactor = tr.localScale;
+        materiales = new Material[maxLevel];
+        animator = tr.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Input
-        if (Input.GetKeyDown(KeyCode.E))
+
+#if DEBUG
+        // Debug Input Input
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            increaseBubbleOnHit(100.0f);
+            increaseBubbleOnHit(1.0f);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             decreaseToLowerLevel();
         }
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("BubbleBounce");
+        }
+#endif
         float delta = Time.deltaTime;
 
         checkInvulnerability(delta);
 
         bubbleGrowth(delta);
 
+        setMaterialByLevel();
+
     }
+
+
+    void setMaterialByLevel()
+    {
+        spriteRenderer.material = materiales[actualLevel-1];
+    }
+
 
     void bubbleGrowth(float deltaTime)
-    {
-        //calculate what value the bubble needs to growth or decreasse
-        float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
-        magnitude = magnitude / Mathf.Abs(magnitude);
-
-        //actual scale aniamtion
-        trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
-    }
-
-    void continousGrowing(float deltaTime)
     {
         if (actualLevel < maxLevel)
         {
@@ -89,26 +104,56 @@ public class MainPompaBehavior : MonoBehaviour
                 actualLevel++;
             }
 
+            //calculate what value the bubble needs to growth or decreasse
+            float magnitude = (scaleFactor * scaleObjetive).x - tr.localScale.x;
+            magnitude = magnitude / Mathf.Abs(magnitude);
+
+            //actual scale aniamtion (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
+            tr.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
         }
     }
 
+
+    //increae the bubbble level by a percentage given by a proyectile
     void increaseBubbleOnHit(float percentageIncreased)
     {
-        //Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
-        levelPercentageRadius += percentageIncreased;
-        if (levelPercentageRadius >= 100.0f)
+
+        float sum = radiusLevelsInterval * percentageIncreased;
+
+        scaleObjetive += sum;
+
+        actualLevel = (int)(scaleObjetive / radiusLevelsInterval);
+
+        if (actualLevel >= maxLevel)
         {
-            levelPercentageRadius -= 100.0f;
-            actualLevel++;
+            actualLevel = maxLevel;
+            scaleObjetive = actualLevel * radiusLevelsInterval;
         }
+
+        //increase instantly
+        tr.localScale = scaleFactor * scaleObjetive;
+
+        //actualize the bubble desired scale
+
+
+        ////Uncomment this code to make the bubble change size dinamically
+        ////Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
+        //levelPercentageRadius += percentageIncreased;
+        //if (levelPercentageRadius >= 100.0f)
+        //{
+        //    levelPercentageRadius -= 100.0f;
+        //    actualLevel++;
+        //}
     }
 
     void decreaseToLowerLevel()
     {
         actualLevel--;
-        levelPercentageRadius = 0.0f;
+        scaleObjetive = actualLevel * radiusLevelsInterval;
+
+        //change scale instantly
+        tr.localScale = scaleFactor * scaleObjetive;
     }
-        
 
     void activateInvulnerability()
     {

@@ -1,20 +1,17 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class ParryObjects : MonoBehaviour
 {
     [SerializeField]
-    Transform shield;
+    GameObject shield;
 
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Parry(CallbackContext context)
     {
-        //GetComponent<PlayerInput>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (context.started)        //Comprobar si el boton se acaba de pulsar
+        {            
+            shield.SetActive(true);
+        }
     }
 }
