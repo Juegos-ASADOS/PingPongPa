@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class MainPompaBehavior : MonoBehaviour
 {
 
+
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -30,20 +31,29 @@ public class MainPompaBehavior : MonoBehaviour
     private Vector3 scaleFactor;
 
     public SpriteRenderer spriteRenderer;
-    public Transform trans;
+    public Transform tr;
 
     //Invulnerability time
     float invulnerableTime = 0.5f;
     float invulnerableCountDown = 0.0f;
     bool bubbleIsInvulnerable = false;
 
+    //Animator Properties
+    Animator animator;
+
+    //array de materiales
+    public Material[] materiales;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        trans = transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        tr = transform;
+        spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
-        scaleFactor = transform.localScale;
+        scaleFactor = tr.localScale;
+        materiales = new Material[maxLevel];
+        animator = tr.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -52,13 +62,17 @@ public class MainPompaBehavior : MonoBehaviour
 
 #if DEBUG
         // Debug Input Input
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             increaseBubbleOnHit(1.0f);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             decreaseToLowerLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("BubbleBounce");
         }
 #endif
         float delta = Time.deltaTime;
@@ -67,7 +81,16 @@ public class MainPompaBehavior : MonoBehaviour
 
         bubbleGrowth(delta);
 
+        setMaterialByLevel();
+
     }
+
+
+    void setMaterialByLevel()
+    {
+        spriteRenderer.material = materiales[actualLevel-1];
+    }
+
 
     void bubbleGrowth(float deltaTime)
     {
@@ -82,11 +105,11 @@ public class MainPompaBehavior : MonoBehaviour
             }
 
             //calculate what value the bubble needs to growth or decreasse
-            float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
+            float magnitude = (scaleFactor * scaleObjetive).x - tr.localScale.x;
             magnitude = magnitude / Mathf.Abs(magnitude);
 
             //actual scale aniamtion (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
-            trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
+            tr.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
         }
     }
 
@@ -108,9 +131,7 @@ public class MainPompaBehavior : MonoBehaviour
         }
 
         //increase instantly
-        trans.localScale = scaleFactor * scaleObjetive;
-
-
+        tr.localScale = scaleFactor * scaleObjetive;
 
         //actualize the bubble desired scale
 
@@ -131,7 +152,7 @@ public class MainPompaBehavior : MonoBehaviour
         scaleObjetive = actualLevel * radiusLevelsInterval;
 
         //change scale instantly
-        trans.localScale = scaleFactor * scaleObjetive;
+        tr.localScale = scaleFactor * scaleObjetive;
     }
 
     void activateInvulnerability()
