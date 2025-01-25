@@ -1,26 +1,22 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
-    InputAction moveAction;
-    Rigidbody2D movementParent;
-
     [SerializeField]
     float speed;
+
+    Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveAction = GetComponent<PlayerInput>().actions.FindAction("Move");
-        movementParent = GetComponentInParent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMove(CallbackContext context)
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-
-        movementParent.angularVelocity = -moveValue.x * speed * 1000 * Time.deltaTime;
+        Vector2 moveValue = context.ReadValue<Vector2>();
+        rb.angularVelocity = -moveValue.x * speed * 1000 * Time.deltaTime;
     }
 }
