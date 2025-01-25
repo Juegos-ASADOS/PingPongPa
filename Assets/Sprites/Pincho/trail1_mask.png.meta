@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4af743be7cc4e6940b69c0653d9bf6e7
+guid: 0ab95c2f28f9307448907ecde09325d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2407129585551251046
-    second: trail_mask_0
+      213: -3704246610157887008
+    second: trail1_mask_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -109,24 +109,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trail_mask_0
+      name: trail1_mask_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a9962ec3568289ed0800000000000000
-      internalID: -2407129585551251046
+      spriteID: 0e12811855fd79cc0800000000000000
+      internalID: -3704246610157887008
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      trail_mask_0: -2407129585551251046
+      trail1_mask_0: -3704246610157887008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

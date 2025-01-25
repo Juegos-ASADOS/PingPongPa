@@ -8,6 +8,13 @@ public class ShieldBehaviour : MonoBehaviour
     float timeParry;
     private float timeActive;   //Tiempo falta para desactivar
 
+    PlayerIDs playerId = PlayerIDs.Null;
+
+    public void Init(PlayerIDs id)
+    {
+        playerId = id;
+    }
+
     private void Update()
     {
         if (timeActive >= 0)
@@ -18,13 +25,14 @@ public class ShieldBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
+        if (timeActive <= 0 && other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
             Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();  //Rigidbody del pincho
             Vector2 dir = other.transform.position - transform.position;    //Claculo del vector de exclusion
 
             rb.linearVelocity = dir.normalized * forceReturn;   //Nueva fuera del pincho
 
+            other.GetComponent<PinchoParry>().hit(playerId);
             //float angle = 0.0f;
 
             //if(other.transform.position.x >= 0)

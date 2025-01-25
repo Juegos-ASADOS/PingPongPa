@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public enum players { PlayerA, PlayerB }
 public class PinchoParry : MonoBehaviour
 {
-    players SpikeType;
+    PlayerIDs SpikeType;
     [SerializeField]
     int remainingHits;
     [SerializeField]
@@ -15,11 +14,11 @@ public class PinchoParry : MonoBehaviour
         switch (Random.Range(0, 2))
         {
             case 0:
-                SpikeType = players.PlayerA;
+                SpikeType = PlayerIDs.PlayerA;
                 GetComponent<SpriteRenderer>().color = colors[0];
                 break;
             case 1:
-                SpikeType = players.PlayerB;
+                SpikeType = PlayerIDs.PlayerB;
                 GetComponent<SpriteRenderer>().color = colors[1];
                 break;
         }
@@ -33,24 +32,26 @@ public class PinchoParry : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void hit(players p)
+
+    public void hit(PlayerIDs p)
     {
         if (p == SpikeType)
         {
             remainingHits--;
             switch (p)
             {
-                case players.PlayerA:
-                    p = players.PlayerB;
+                case PlayerIDs.PlayerA:
+                    SpikeType = PlayerIDs.PlayerB;
                     GetComponent<SpriteRenderer>().color = colors[1];
                     break;
-                case players.PlayerB:
-                    p = players.PlayerA;
+                case PlayerIDs.PlayerB:
+                    SpikeType = PlayerIDs.PlayerA;
                     GetComponent<SpriteRenderer>().color = colors[0];
                     break;
             }
         }
     }
+
     public void MainBubbleCollided()
     {
         //Playear la animación de muerte explotar
