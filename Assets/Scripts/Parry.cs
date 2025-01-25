@@ -12,7 +12,6 @@ public class ParryObjects : MonoBehaviour
         if (context.started)        //Comprobar si el boton se acaba de pulsar
         {            
             shield.SetActive(true);
-            Debug.Log("HOLO");
         }
     }
 }
