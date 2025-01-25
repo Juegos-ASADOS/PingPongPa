@@ -1,16 +1,16 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MainPompaBehavior : MonoBehaviour
 {
 
-    //The ammount of scale taht correspond to each level
-    public float scaleLevelsInterval = 1.0f;
+    //The ammount of scale that correspond to each level
+    public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
-    public float GrowSpeedSeconds = 5.0f;
+    public float growSpeedSeconds = 5.0f;
 
-    //It will go 2 time faster when the bubble isnt the scale that is desired
+    //It will go x time faster when the bubble isnt the scale that is desired
     public float animationGrothSpeed = 2.0f;
-
 
     //max level into wich it stop growing
     public int maxLevel = 5;
@@ -22,12 +22,19 @@ public class MainPompaBehavior : MonoBehaviour
 
     int actualLevel = 1;
 
+    //Percentage use to measure actual level radius
+    float levelPercentageRadius = 0.0f;
+
     //this one is in case the object has an initial scale diferent to (1,1,1)
     private Vector3 scaleFactor;
 
     public SpriteRenderer spriteRenderer;
     public Transform trans;
 
+    //Invulnerability time
+    float invulnerableTime = 0.5f;
+    float invulnerableCountDown = 0.0f;
+    bool bubbleIsInvulnerable = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,35 +48,68 @@ public class MainPompaBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float delta = Time.deltaTime;
-        continousGrowing(delta);
 
-        trans.localScale =  scaleFactor * scaleObjetive;
+
+        //continousGrowing(delta);
+
+        //trans.localScale =  scaleFactor * scaleObjetive;
 
     }
 
-    void inmediateGrowing()
+    //void inmediateGrowing()
+    //{
+    //    if (actualLevel < maxLevel)
+    //    {
+    //        actualLevel++;
+    //        scaleObjetive = scaleLevelsInterval * actualLevel;
+    //    }
+    //}
+
+    //void continousGrowing(float deltaTime)
+    //{
+    //    if (actualLevel < maxLevel)
+    //    {
+    //        //crecimiento por tiempo
+    //        scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
+
+    //        if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
+    //        {
+    //            actualLevel++;
+    //        }
+    //    }
+    //}
+
+    void increaseBubbleOnHit(float percentageIncreased)
     {
-        if (actualLevel < maxLevel)
+        //Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
+        levelPercentageRadius += percentageIncreased;
+        if (levelPercentageRadius >= 100.0f)
         {
+            levelPercentageRadius -= 100.0f;
             actualLevel++;
-            scaleObjetive = scaleLevelsInterval * actualLevel;
         }
     }
 
-    void continousGrowing(float deltaTime)
+    void decreaseToLowerLevel()
     {
-        if (actualLevel < maxLevel)
-        {
-            //crecimiento por tiempo
-            scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
+        actualLevel--;
+        levelPercentageRadius = 0.0f;
+    }
 
-            if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
-            {
-                actualLevel++;
-            }
-        }
+    void activateInvulnerability()
+    {
+        invulnerableCountDown = invulnerableTime;
+        bubbleIsInvulnerable = true;
+    }
+
+    void checkInvulnerability(float deltaTime)
+    {
+        invulnerableCountDown -= deltaTime;
+
+        if (invulnerableCountDown <= 0.0f)
+            bubbleIsInvulnerable=false;
+            
     }
 
 }
