@@ -32,15 +32,14 @@ public class ShieldBehaviour : MonoBehaviour
             other.GetComponent<Spike>().SetVelocity(dir.normalized * forceReturn);
 
             other.GetComponent<PinchoParry>().hit(playerId);
-            //float angle = 0.0f;
 
-            //if(other.transform.position.x >= 0)
-            //    angle = Vector2.Angle(dir, Vector2.down);
-            //else
-            //    angle = -Vector2.Angle(dir, Vector2.down);
+        }
+        else if ( other.gameObject.layer == 8)
+        {
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
+            other.GetComponent<TinyBubble>().SetVelocity(dir.normalized * forceReturn);
 
-            //rb.transform.eulerAngles = new Vector3(0,0,angle);
-
+            other.GetComponent<TinyBubbleParry>().hit();
         }
     }
 

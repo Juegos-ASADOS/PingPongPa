@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ReboundingZone : MonoBehaviour
 {
-    const int SPIKELAYER_OSCAR = 6;
+    const int SPIKELAYER = 6;
 
     [SerializeField]
     private float reboundingSpeed = 50.0f;
@@ -13,7 +13,7 @@ public class ReboundingZone : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        if (collision.gameObject.layer == SPIKELAYER_OSCAR)
+        if (collision.gameObject.layer == SPIKELAYER)
         {
             float angle = (Random.Range(_randomAngleMax, -_randomAngleMax)) * Mathf.Deg2Rad;          //Angulo random para que no sea la normal
 
