@@ -304,6 +304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PinchoSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1728171090604528762, guid: 91169e449238a894c9850835fe9140e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3680125502641769351, guid: 91169e449238a894c9850835fe9140e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -625,6 +629,10 @@ PrefabInstance:
     - target: {fileID: 4880606371049736750, guid: acc3c1eb6e4b86c40b31b93495975c11, type: 3}
       propertyPath: m_Name
       value: BubbleSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880606371049736750, guid: acc3c1eb6e4b86c40b31b93495975c11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8115507793817800167, guid: acc3c1eb6e4b86c40b31b93495975c11, type: 3}
       propertyPath: m_LocalPosition.x
