@@ -21,10 +21,10 @@ public class MainPompaBehavior : MonoBehaviour
 
     public int initialLevel = 2;
 
-    int actualLevel = 1;
+    public int actualLevel = 1;
 
     //Percentage use to measure actual level radius
-    float levelPercentageRadius = 0.0f;
+    //float levelPercentageRadius = 0.0f;
 
     //this one is in case the object has an initial scale diferent to (1,1,1)
     private Vector3 scaleFactor;
@@ -52,7 +52,7 @@ public class MainPompaBehavior : MonoBehaviour
         //Input
         if (Input.GetKeyDown(KeyCode.E))
         {
-            increaseBubbleOnHit(100.0f);
+            increaseBubbleOnHit(1.0f);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -69,16 +69,6 @@ public class MainPompaBehavior : MonoBehaviour
 
     void bubbleGrowth(float deltaTime)
     {
-        //calculate what value the bubble needs to growth or decreasse
-        float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
-        magnitude = magnitude / Mathf.Abs(magnitude);
-
-        //actual scale aniamtion
-        trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
-    }
-
-    void continousGrowing(float deltaTime)
-    {
         if (actualLevel < maxLevel)
         {
             //crecimiento por tiempo
@@ -89,26 +79,49 @@ public class MainPompaBehavior : MonoBehaviour
                 actualLevel++;
             }
 
+            //calculate what value the bubble needs to growth or decreasse
+            float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
+            magnitude = magnitude / Mathf.Abs(magnitude);
+
+            //actual scale aniamtion
+            trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
         }
     }
 
+
     void increaseBubbleOnHit(float percentageIncreased)
     {
-        //Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
-        levelPercentageRadius += percentageIncreased;
-        if (levelPercentageRadius >= 100.0f)
-        {
-            levelPercentageRadius -= 100.0f;
-            actualLevel++;
+
+        float sum = radiusLevelsInterval * percentageIncreased;
+
+        scaleObjetive += sum;
+
+        actualLevel = (int)(scaleObjetive / radiusLevelsInterval);
+
+        if (actualLevel >= maxLevel)
+        { 
+            actualLevel = maxLevel;
+            scaleObjetive = actualLevel * radiusLevelsInterval; 
         }
+
+        trans.localScale = scaleFactor * scaleObjetive;
+
+
+        ////Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
+        //levelPercentageRadius += percentageIncreased;
+        //if (levelPercentageRadius >= 100.0f)
+        //{
+        //    levelPercentageRadius -= 100.0f;
+        //    actualLevel++;
+        //}
     }
 
     void decreaseToLowerLevel()
     {
         actualLevel--;
-        levelPercentageRadius = 0.0f;
+        scaleObjetive = actualLevel * radiusLevelsInterval;
+        trans.localScale = scaleFactor * scaleObjetive;
     }
-        
 
     void activateInvulnerability()
     {
