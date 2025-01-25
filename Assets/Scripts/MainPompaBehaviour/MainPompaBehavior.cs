@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MainPompaBehavior : MonoBehaviour
@@ -15,8 +16,8 @@ public class MainPompaBehavior : MonoBehaviour
     //max level into wich it stop growing
     public int maxLevel = 5;
 
-    //esta es la variable que vamos a utilizar para animar y calcular el crecimineto actual
-    private float scaleObjetive = 1;
+    //this is the variable we are gonna use to animate cand calculate the actual growth
+    public float scaleObjetive = 1;
 
     public int initialLevel = 2;
 
@@ -45,7 +46,14 @@ public class MainPompaBehavior : MonoBehaviour
         float delta = Time.deltaTime;
         continousGrowing(delta);
 
-        trans.localScale =  scaleFactor * scaleObjetive;
+        ScalarLerp a = new ScalarLerp();
+
+        //calculate what value the bubble needs to growth or decreasse
+        float magnitude =  (scaleFactor * scaleObjetive).x - trans.localScale.x;
+        magnitude = magnitude / Mathf.Abs(magnitude);
+
+        //actual scale aniamtion
+        trans.localScale += Vector3.one * (animationGrothSpeed * delta) * magnitude;
 
     }
 
@@ -62,7 +70,7 @@ public class MainPompaBehavior : MonoBehaviour
     {
         if (actualLevel < maxLevel)
         {
-            //crecimiento por tiempo
+            //growth by time
             scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
 
             if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
