@@ -54,13 +54,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Frequency: 3
+    - _Frequency: 2
     - _Level: 0
     - _MoveCenter: -0.5
     - _NoiseToTexture: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScaleUV: 1.5
+    - _ScaleUV: 1.05
     - _Speed: 0.2
     m_Colors: []
   m_BuildTextureStacks: []
