@@ -72,7 +72,7 @@ public class MainPompaBehavior : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetTrigger("BubbleBounce");
+            playBounceAnimation();
         }
 #endif
         float delta = Time.deltaTime;
@@ -117,6 +117,8 @@ public class MainPompaBehavior : MonoBehaviour
     //increae the bubbble level by a percentage given by a proyectile
     void increaseBubbleOnHit(float percentageIncreased)
     {
+        if (actualLevel >= maxLevel)
+            return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
 
@@ -124,11 +126,14 @@ public class MainPompaBehavior : MonoBehaviour
 
         actualLevel = (int)(scaleObjetive / radiusLevelsInterval);
 
-        if (actualLevel >= maxLevel)
+        if (actualLevel > maxLevel)
         {
             actualLevel = maxLevel;
             scaleObjetive = actualLevel * radiusLevelsInterval;
         }
+        else
+            //Animation
+            playBounceAnimation();
 
         //increase instantly
         tr.localScale = scaleFactor * scaleObjetive;
@@ -148,11 +153,17 @@ public class MainPompaBehavior : MonoBehaviour
 
     void decreaseToLowerLevel()
     {
+        if (actualLevel <= 0)
+            return;
         actualLevel--;
         scaleObjetive = actualLevel * radiusLevelsInterval;
 
         //change scale instantly
         tr.localScale = scaleFactor * scaleObjetive;
+
+        if(actualLevel >= 1)
+            //Animation
+            playBounceAnimation();
     }
 
     void activateInvulnerability()
@@ -168,6 +179,11 @@ public class MainPompaBehavior : MonoBehaviour
         if (invulnerableCountDown <= 0.0f)
             bubbleIsInvulnerable=false;
             
+    }
+
+    void playBounceAnimation()
+    {
+        animator.SetTrigger("BubbleBounce");
     }
 
 }
