@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 /* 
  * Script que se encarga del movimiento aleatorio del pincho
  */
@@ -6,113 +7,64 @@ public class PinchoMovement : MonoBehaviour
 {
     [SerializeField]
     float speed;
-    float screenWidth, screenHeight;
-    float top, bottom, left, right;
-    Vector2 direction, position;
+    float sceneryRadius=4.5f;
     private void Awake()
     {
-        // Detecta los bordes de la pantalla
-        position = Camera.main.WorldToViewportPoint(transform.position);
-        // Dirección inicial aleatoria
-        //direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-        //transform.rotation = Quaternion.Euler(direction);
-        // transform.up = direction;
-        //transform.rotation = direction;
-        
-        Debug.Log("Up: " + transform.up);
-        screenHeight = Screen.height;
-        screenWidth = Screen.width;
 
-        float h = transform.localScale.y / 2;
-        float w = transform.localScale.x / 2;
-        top = (screenHeight / 2 - h) / 100;
-        bottom = (-1 * screenHeight / 2) / 100;
-        left = (-1 * screenWidth / 2 + w) / 100;
-        right = (screenWidth / 2 - w) / 100;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        sceneryRadius = sceneryRadius - (transform.localScale.x / 200);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        //GetComponent<Rigidbody2D>().AddForce(direction);
         // Mueve el objeto
         transform.Translate(-transform.up * speed * Time.deltaTime, Space.World);
+        CheckBounds();
+    }
+    public void setSceneryRadius(float radius)
+    {
+        sceneryRadius = radius-(transform.localScale.x / 200);
+    }
+    private void CheckBounds()
+    {
+        // Calcula la distancia del objeto al centro del círculo
+        Vector2 position = transform.position;
+        float distanceToCenter = position.magnitude;
 
-        //if (transform.position.y >= top)
-        //{
-        //    direction.y = -direction.y;
-        //    // transform.up = direction;
-        //}
-        //else if (transform.position.y <= bottom)
-        //{
-        //    direction.y = -direction.y;
-        //    // transform.up = direction;
-        //}
-        //else if (transform.position.x <= left)
-        //{
-        //    direction.x = -direction.x;
-        //    // transform.up = direction;
-        //}
-        //else if (transform.position.x >= right)
-        //{
-        //    direction.x = -direction.x;
-        //    // transform.up = direction;
-        //}
-        //transform.up = direction;
+               // Si el objeto está fuera del radio del escenario, ajusta la dirección
+        if (distanceToCenter >= sceneryRadius)
+        {
+            //// Obtén la dirección hacia el centro del círculo
+            //Vector2 toCenter = -position.normalized;
+
+            //// Calcula el ángulo necesario para reorientar el objeto
+            //float angle = Mathf.Atan2(toCenter.y, toCenter.x) * Mathf.Rad2Deg;
+            //angle = 360 - angle;
+            //// Ajusta la rotación para que apunte hacia el interior del círculo
+            //transform.rotation = Quaternion.Euler(0, 0, angle + 180);
+            // Calcula la normal del punto de colisión (dirección desde el centro)
+            Vector2 normal = position.normalized;
+            
+            // Refleja el vector 'transform.up' respecto a la normal
+            Vector2 reflectedDirection = Vector2.Reflect(transform.up, normal);
+
+            float angle=180 + Random.Range(30, -30);
+            // Calcula el ángulo de la nueva dirección
+            // float angle = Mathf.Atan2(-reflectedDirection.y, -reflectedDirection.x) * Mathf.Rad2Deg;
+           // angle = 360 - angle;
+            // Ajusta la rotación para que apunte en la nueva dirección reflejada
+            transform.rotation *= Quaternion.Euler(0, 0, angle);
+            Debug.DrawRay(position, -reflectedDirection,Color.red,3);
+
+            // Ajusta la posición para que quede justo dentro del círculo
+            transform.position = normal * sceneryRadius;
+            
+        }
     }
 }
-//using UnityEngine;
-///* 
-// * Script que se encarga del movimiento aleatorio del pincho
-// */
-//public class PinchoMovement : MonoBehaviour
-//{
-//    [SerializeField]
-//    private float speed = 5f; // Velocidad del pincho
-
-//    private Vector2 direction; // Dirección del movimiento
-//    private float top, bottom, left, right; // Límites de la pantalla
-
-//    private void Awake()
-//    {
-//        // Dirección inicial aleatoria y normalizada
-//        direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-
-//        // Calcular los límites del mundo (posición en coordenadas del mundo)
-//        Vector3 screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
-//        Vector3 screenTopRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
-
-//        // Ajustar límites según el tamaño del objeto
-//        float halfWidth = transform.localScale.x / 2;
-//        float halfHeight = transform.localScale.y / 2;
-
-//        left = screenBottomLeft.x + halfWidth;
-//        right = screenTopRight.x - halfWidth;
-//        bottom = screenBottomLeft.y + halfHeight;
-//        top = screenTopRight.y - halfHeight;
-//    }
-
-//    private void Update()
-//    {
-//        // Mueve el objeto en la dirección actual
-//        transform.Translate(direction * speed * Time.deltaTime);
-
-//        // Verifica los límites de la pantalla para cambiar la dirección
-//        if (transform.position.y >= top || transform.position.y <= bottom)
-//        {
-//            direction.y = -direction.y; // Invierte la dirección en Y
-//        }
-
-//        if (transform.position.x >= right || transform.position.x <= left)
-//        {
-//            direction.x = -direction.x; // Invierte la dirección en X
-//        }
-//    }
-//}
 

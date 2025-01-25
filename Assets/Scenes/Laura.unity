@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeetweenSpikes: 3
-  spawningRadious: 3
+  spawningRadious: 5
   spikeSpeed: 1
   spikePrefab: {fileID: 9210002571197935720, guid: e7957bcc17503ed4d968b5b330199973, type: 3}
   angleBetweenSpikes: 5
