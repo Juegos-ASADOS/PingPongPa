@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ReboundingZone : MonoBehaviour
 {
@@ -8,25 +7,29 @@ public class ReboundingZone : MonoBehaviour
     [SerializeField]
     private float reboundingSpeed = 50.0f;
 
+    [SerializeField]
+    private float _randomAngleMax = 30f;
 
     private void OnTriggerExit2D(Collider2D collision)
-    {   
-        float angle = 180 + Random.Range(30, -30);          //Angulo random para que no sea la normal
-
-        // Ajusta la rotación para que apunte en la nueva dirección reflejada
-        collision.transform.rotation *= Quaternion.Euler(0, 0, angle);
-
-        Vector2 dir = -collision.transform.position;
-        dir = dir.normalized;  
-        dir*=reboundingSpeed;
+    {
 
         if (collision.gameObject.layer == SPIKELAYER_OSCAR)
         {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            Transform spikeTransform = rb.transform;
+            float angle = (Random.Range(_randomAngleMax, -_randomAngleMax)) * Mathf.Deg2Rad;          //Angulo random para que no sea la normal
 
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(dir);
+            Vector2 dir = -collision.transform.position;
+
+            dir = dir.normalized;
+            dir = new Vector2(
+                dir.x * Mathf.Cos(angle) - dir.y * Mathf.Sin(angle),
+                dir.x * Mathf.Sin(angle) + dir.y * Mathf.Cos(angle)
+            );
+
+            dir = dir.normalized;
+            dir *= reboundingSpeed;
+
+            collision.GetComponent<Spike>().SetVelocity(dir);
+
 
             //float rotationAngle = Mathf.Atan2(spikeTransform.position.x, spikeTransform.position.y) * Mathf.Rad2Deg;
             ////rotationAngle = 360 - rotationAngle;

@@ -99,7 +99,7 @@ public class MainPompaBehavior : MonoBehaviour
 
     void setMaterialByLevel()
     {
-        
+
         if (actualLevel < 1 || spriteRenderer.material != materiales[actualLevel - 1])
             return;
         spriteRenderer.material = materiales[actualLevel - 1];
@@ -192,7 +192,7 @@ public class MainPompaBehavior : MonoBehaviour
         //change scale instantly
         tr.localScale = scaleFactor * scaleObjetive;
 
-        if(actualLevel >= 1)
+        if (actualLevel >= 1)
             //Animation
             playBounceAnimation();
     }
@@ -208,8 +208,8 @@ public class MainPompaBehavior : MonoBehaviour
         invulnerableCountDown -= deltaTime;
 
         if (invulnerableCountDown <= 0.0f)
-            bubbleIsInvulnerable=false;
-            
+            bubbleIsInvulnerable = false;
+
     }
 
     void playBounceAnimation()
@@ -229,7 +229,15 @@ public class MainPompaBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        decreaseToLowerLevel();
-        other.GetComponent<PinchoParry>().MainBubbleCollided();
+        if (other.gameObject.layer == 6)
+        {
+            decreaseToLowerLevel();
+            other.GetComponent<PinchoParry>().MainBubbleCollided();
+        }
+        else if(other.gameObject.layer == 8)
+        {
+            Destroy(other.gameObject);
+            increaseBubbleOnHit(1);
+        }
     }
 }
