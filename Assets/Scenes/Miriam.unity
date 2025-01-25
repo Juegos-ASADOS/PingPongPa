@@ -572,7 +572,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerColor1: {r: 0.259, g: 0.863, b: 0.737, a: 1}
   PlayerColor2: {r: 1, g: 0.631, b: 0.773, a: 1}
-  pSystem: {fileID: 0}
 --- !u!1 &1583073771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +1966,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.87725186, g: 0.8846752, b: 0.637897, a: 1}
+        key0: {r: 1, g: 0.9167797, b: 0.40566027, a: 1}
         key1: {r: 0, g: 1, b: 0.94889164, a: 1}
         key2: {r: 0, g: 1, b: 0.94889164, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1976,7 +1975,7 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 62451
+        ctime1: 65535
         ctime2: 35209
         ctime3: 0
         ctime4: 0
