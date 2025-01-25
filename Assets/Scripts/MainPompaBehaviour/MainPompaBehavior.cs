@@ -230,7 +230,6 @@ public class MainPompaBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         decreaseToLowerLevel();
-        //Aquí va a haber que llamar a la animación de muerte del pincho cuando la haya
-        Destroy(other.gameObject);
+        other.GetComponent<PinchoParry>().MainBubbleCollided();
     }
 }

@@ -51,5 +51,11 @@ public class PinchoParry : MonoBehaviour
             }
         }
     }
+    public void MainBubbleCollided()
+    {
+        //Playear la animación de muerte explotar
+        Destroy(gameObject);
+
+    }
 
 }
