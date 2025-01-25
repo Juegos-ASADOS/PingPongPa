@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceReturn: 5
   timeParry: 0.5
-  cooldown: 0
 --- !u!1 &1244008585236321619
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  reboundTime: 0.5
+  reboundTime: 1
   playerRealTr: {fileID: 1107333475329581561}
 --- !u!1 &4609933323433901765
 GameObject:
@@ -464,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5a7813ac6f548a8b5ef73bce5084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reboundForce: 100
+  reboundForce: 200
 --- !u!61 &1409446936363775594
 BoxCollider2D:
   m_ObjectHideFlags: 0

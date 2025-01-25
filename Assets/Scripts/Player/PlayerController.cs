@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     PlayerIDs playerId = PlayerIDs.Null;
 
+    bool onRebound = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,13 +47,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (reboundTimer < reboundTime)
+        if (onRebound)
+        {
             reboundTimer += Time.deltaTime;
+            if (reboundTimer > reboundTime)
+            {
+                onRebound = false;
+                rb.angularDamping = 0f;
+            }
+        }
     }
 
     public void OnMove(CallbackContext context)
     {
-        if (reboundTimer < reboundTime)
+        if (onRebound)
             return;
 
         Vector2 moveValue = context.ReadValue<Vector2>();
@@ -60,7 +69,9 @@ public class PlayerController : MonoBehaviour
 
     public void StopForRebound()
     {
+        onRebound = true;
         reboundTimer = 0f;
+        rb.angularDamping = 1f;
     }
 
     public void BubbleSizeChanged(float newScale)
