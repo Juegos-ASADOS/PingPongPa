@@ -15,11 +15,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform playerRealTr;
 
+    int playerId = -1;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         reboundTimer = reboundTime;
+    }
+
+    public void Init(int id)
+    {
+        playerId = id;
+
+        // TODO: cambiar por cambiar el sprite
+        if (playerId == 1)
+            GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        else if (playerId == 2)
+        {
+            GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            transform.localEulerAngles = new Vector3(0, 0, 180);
+        }
     }
 
     private void Update()
