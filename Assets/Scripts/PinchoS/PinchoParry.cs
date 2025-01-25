@@ -2,26 +2,27 @@ using UnityEngine;
 
 public class PinchoParry : MonoBehaviour
 {
-    PlayerIDs SpikeType;
+    PlayerIDs spikeType;
     [SerializeField]
     int remainingHits;
     [SerializeField]
     Color[] colors = new Color[2];
-    Color spritecolor;
+    //Color spritecolor;
+    ColorChangePincho colorCntrl;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        colorCntrl = GetComponent<ColorChangePincho>();
         switch (Random.Range(0, 2))
         {
             case 0:
-                SpikeType = PlayerIDs.PlayerA;
-                GetComponent<SpriteRenderer>().color = colors[0];
+                spikeType = PlayerIDs.PlayerA;
                 break;
             case 1:
-                SpikeType = PlayerIDs.PlayerB;
-                GetComponent<SpriteRenderer>().color = colors[1];
+                spikeType = PlayerIDs.PlayerB;                
                 break;
         }
+        colorCntrl.ChangeColorPincho((int)spikeType - 1);
     }
 
     // Update is called once per frame
@@ -35,28 +36,25 @@ public class PinchoParry : MonoBehaviour
 
     public void hit(PlayerIDs p)
     {
-        if (p == SpikeType)
+        if (p == spikeType)
         {
             remainingHits--;
             switch (p)
             {
                 case PlayerIDs.PlayerA:
-                    SpikeType = PlayerIDs.PlayerB;
-                    GetComponent<SpriteRenderer>().color = colors[1];
+                    spikeType = PlayerIDs.PlayerB;
                     break;
                 case PlayerIDs.PlayerB:
-                    SpikeType = PlayerIDs.PlayerA;
-                    GetComponent<SpriteRenderer>().color = colors[0];
+                    spikeType = PlayerIDs.PlayerA;
                     break;
             }
         }
+        colorCntrl.ChangeColorPincho((int)spikeType - 1);
     }
 
     public void MainBubbleCollided()
     {
         //Playear la animación de muerte explotar
         Destroy(gameObject);
-
     }
-
 }
