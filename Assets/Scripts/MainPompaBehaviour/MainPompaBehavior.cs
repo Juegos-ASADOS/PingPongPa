@@ -226,4 +226,11 @@ public class MainPompaBehavior : MonoBehaviour
 
         OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        decreaseToLowerLevel();
+        //Aquí va a haber que llamar a la animación de muerte del pincho cuando la haya
+        Destroy(other.gameObject);
+    }
 }
