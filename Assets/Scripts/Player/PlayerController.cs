@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
             if (reboundTimer > reboundTime)
             {
                 onRebound = false;
-                rb.angularDamping = 0f;
             }
         }
     }
@@ -64,7 +63,9 @@ public class PlayerController : MonoBehaviour
             return;
 
         Vector2 moveValue = context.ReadValue<Vector2>();
-        rb.angularVelocity = -moveValue.x * speed * 1000 * Time.deltaTime;
+        int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
+        rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
+        rb.angularDamping = 0f;
     }
 
     public void StopForRebound()

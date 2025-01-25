@@ -22,6 +22,7 @@ public class TinyBubbleParry : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void hit()
     {
         spritecolor = colors[1];
