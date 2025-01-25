@@ -8,6 +8,13 @@ public class ShieldBehaviour : MonoBehaviour
     float timeParry;
     private float timeActive;   //Tiempo falta para desactivar
 
+    PlayerIDs playerId = PlayerIDs.Null;
+
+    public void Init(PlayerIDs id)
+    {
+        playerId = id;
+    }
+
     private void Update()
     {
         if (timeActive >= 0)
@@ -25,6 +32,7 @@ public class ShieldBehaviour : MonoBehaviour
 
             rb.linearVelocity = dir.normalized * forceReturn;   //Nueva fuera del pincho
 
+            other.GetComponent<PinchoParry>().hit(playerId);
             //float angle = 0.0f;
 
             //if(other.transform.position.x >= 0)

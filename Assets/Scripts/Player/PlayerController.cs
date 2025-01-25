@@ -1,5 +1,8 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.InputSystem.InputAction;
+
+public enum PlayerIDs { PlayerA = 1, PlayerB, Null = -1 }
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform playerRealTr;
 
-    int playerId = -1;
+    PlayerIDs playerId = PlayerIDs.Null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,16 +29,18 @@ public class PlayerController : MonoBehaviour
 
     public void Init(int id)
     {
-        playerId = id;
+        playerId = (PlayerIDs)id;
 
         // TODO: cambiar por cambiar el sprite
-        if (playerId == 1)
-            GetComponentInChildren<SpriteRenderer>().color = Color.blue;
-        else if (playerId == 2)
+        if (playerId == PlayerIDs.PlayerA)
+            GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 206);
+        else if (playerId == PlayerIDs.PlayerB)
         {
-            GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            GetComponentInChildren<SpriteRenderer>().color = new Color(0, 255, 0);
             transform.localEulerAngles = new Vector3(0, 0, 180);
         }
+
+        GetComponentInChildren<ShieldBehaviour>(true).Init(playerId);
     }
 
     private void Update()
