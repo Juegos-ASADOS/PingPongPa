@@ -25,7 +25,7 @@ public class ShieldBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (timeActive <= 0 && other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
+        if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
             Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
 
