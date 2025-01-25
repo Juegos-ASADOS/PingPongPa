@@ -72,7 +72,7 @@ public class MainPompaBehavior : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetTrigger("BubbleBounce");
+            playBounceAnimation();
         }
 #endif
         float delta = Time.deltaTime;
@@ -168,6 +168,11 @@ public class MainPompaBehavior : MonoBehaviour
         if (invulnerableCountDown <= 0.0f)
             bubbleIsInvulnerable=false;
             
+    }
+
+    void playBounceAnimation()
+    {
+        animator.SetTrigger("BubbleBounce");
     }
 
 }
