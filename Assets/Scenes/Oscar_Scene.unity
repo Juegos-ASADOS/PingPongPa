@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710521686}
   - component: {fileID: 710521685}
+  - component: {fileID: 710521687}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -207,6 +208,19 @@ Transform:
   - {fileID: 1822427606}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710521687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710521684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b8d9936878494493467cec4d07a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: {fileID: 1822427605}
 --- !u!1 &1730824568
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,13 +369,14 @@ GameObject:
   - component: {fileID: 1822427606}
   - component: {fileID: 1822427608}
   - component: {fileID: 1822427607}
+  - component: {fileID: 1822427609}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1822427606
 Transform:
   m_ObjectHideFlags: 0
@@ -407,7 +422,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -468,6 +483,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1822427609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822427605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac758602d9a8ad47b63b4aedf712058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceReturn: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
