@@ -117,6 +117,8 @@ public class MainPompaBehavior : MonoBehaviour
     //increae the bubbble level by a percentage given by a proyectile
     void increaseBubbleOnHit(float percentageIncreased)
     {
+        if (actualLevel >= maxLevel)
+            return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
 
@@ -124,7 +126,7 @@ public class MainPompaBehavior : MonoBehaviour
 
         actualLevel = (int)(scaleObjetive / radiusLevelsInterval);
 
-        if (actualLevel >= maxLevel)
+        if (actualLevel > maxLevel)
         {
             actualLevel = maxLevel;
             scaleObjetive = actualLevel * radiusLevelsInterval;
@@ -151,14 +153,17 @@ public class MainPompaBehavior : MonoBehaviour
 
     void decreaseToLowerLevel()
     {
+        if (actualLevel <= 0)
+            return;
         actualLevel--;
         scaleObjetive = actualLevel * radiusLevelsInterval;
 
         //change scale instantly
         tr.localScale = scaleFactor * scaleObjetive;
 
-        //Animation
-        playBounceAnimation();
+        if(actualLevel >= 1)
+            //Animation
+            playBounceAnimation();
     }
 
     void activateInvulnerability()
