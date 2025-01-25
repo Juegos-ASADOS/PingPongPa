@@ -1,20 +1,19 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ParryObjects : MonoBehaviour
 {
     [SerializeField]
-    Transform shield;
+    GameObject shield;
 
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //GetComponent<PlayerInput>();
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Parry()
     {
-        
+        shield.SetActive(true);
     }
 }
