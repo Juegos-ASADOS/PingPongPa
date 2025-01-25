@@ -1,6 +1,9 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
@@ -44,6 +47,7 @@ public class MainPompaBehavior : MonoBehaviour
     //array de materiales
     public Material[] materiales;
 
+    public UnityEvent<float> OnSizeChange;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -70,7 +74,7 @@ public class MainPompaBehavior : MonoBehaviour
         {
             decreaseToLowerLevel();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             playBounceAnimation();
         }
@@ -110,6 +114,7 @@ public class MainPompaBehavior : MonoBehaviour
 
             //actual scale aniamtion (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
             tr.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
+            OnSizeChange.Invoke(tr.localScale.y);
         }
     }
 
@@ -186,4 +191,13 @@ public class MainPompaBehavior : MonoBehaviour
         animator.SetTrigger("BubbleBounce");
     }
 
+    public void PlayerSpawned(PlayerInput player)
+    {
+        Transform playerTr = player.transform.GetChild(0);
+
+        Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
+        playerTr.SetLocalPositionAndRotation(playerPos, playerTr.localRotation);
+
+        OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
+    }
 }

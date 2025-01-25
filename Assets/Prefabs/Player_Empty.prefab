@@ -188,7 +188,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -343,7 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678a8373fbb04044cbf88e32babbabe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 10
+  reboundTime: 0.5
+  playerRealTr: {fileID: 1107333475329581561}
 --- !u!1 &4609933323433901765
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 4609933323433901765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -460,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5a7813ac6f548a8b5ef73bce5084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reboundForce: 150
+  reboundForce: 100
 --- !u!61 &1409446936363775594
 BoxCollider2D:
   m_ObjectHideFlags: 0

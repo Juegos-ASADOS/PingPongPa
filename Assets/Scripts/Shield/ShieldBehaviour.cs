@@ -24,7 +24,9 @@ public class ShieldBehaviour : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
 
             Vector2 dir = other.transform.position - transform.position;
-            rb.AddForce(dir.normalized * forceReturn);
+            rb.linearVelocity = dir.normalized * forceReturn;
+
+            rb.transform.rotation.SetLookRotation(rb.linearVelocity, rb.transform.up);
         }
     }
 
