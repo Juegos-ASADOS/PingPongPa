@@ -8,6 +8,13 @@ public class ShieldBehaviour : MonoBehaviour
     float timeParry;
     private float timeActive;   //Tiempo falta para desactivar
 
+    PlayerIDs playerId = PlayerIDs.Null;
+
+    public void Init(PlayerIDs id)
+    {
+        playerId = id;
+    }
+
     private void Update()
     {
         if (timeActive >= 0)
@@ -18,22 +25,21 @@ public class ShieldBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (timeActive <= 0 && other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
+        if (other.gameObject.layer == 6)      //Colision con la layer de los proyectiles
         {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();  //Rigidbody del pincho
-            Vector2 dir = other.transform.position - transform.position;    //Claculo del vector de exclusion
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
 
-            rb.linearVelocity = dir.normalized * forceReturn;   //Nueva fuera del pincho
+            other.GetComponent<Spike>().SetVelocity(dir.normalized * forceReturn);
 
-            //float angle = 0.0f;
+            other.GetComponent<PinchoParry>().hit(playerId);
 
-            //if(other.transform.position.x >= 0)
-            //    angle = Vector2.Angle(dir, Vector2.down);
-            //else
-            //    angle = -Vector2.Angle(dir, Vector2.down);
+        }
+        else if ( other.gameObject.layer == 8)
+        {
+            Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
+            other.GetComponent<TinyBubble>().SetVelocity(dir.normalized * forceReturn);
 
-            //rb.transform.eulerAngles = new Vector3(0,0,angle);
-
+            other.GetComponent<TinyBubbleParry>().hit();
         }
     }
 
