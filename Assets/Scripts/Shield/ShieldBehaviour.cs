@@ -10,7 +10,7 @@ public class ShieldBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if(timeActive >=0)
+        if (timeActive >= 0)
             timeActive -= Time.deltaTime;
         else
             transform.gameObject.SetActive(false);
@@ -25,7 +25,11 @@ public class ShieldBehaviour : MonoBehaviour
 
             Vector2 dir = other.transform.position - transform.position;
             rb.AddForce(dir.normalized * forceReturn);
-            timeActive = timeParry;
         }
+    }
+
+    private void OnEnable()
+    {
+        timeActive = timeParry;
     }
 }
