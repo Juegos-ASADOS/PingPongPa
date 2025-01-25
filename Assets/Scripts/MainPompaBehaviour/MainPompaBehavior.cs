@@ -49,41 +49,47 @@ public class MainPompaBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Input
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            increaseBubbleOnHit(100.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            decreaseToLowerLevel();
+        }
+
         float delta = Time.deltaTime;
 
-        ScalarLerp a = new ScalarLerp();
+        checkInvulnerability(delta);
 
-        //calculate what value the bubble needs to growth or decreasse
-        float magnitude =  (scaleFactor * scaleObjetive).x - trans.localScale.x;
-        magnitude = magnitude / Mathf.Abs(magnitude);
-
-        //actual scale aniamtion
-        trans.localScale += Vector3.one * (animationGrothSpeed * delta) * magnitude;
+        bubbleGrowth(delta);
 
     }
 
-    void inmediateGrowing()
+    void bubbleGrowth(float deltaTime)
     {
-       if (actualLevel < maxLevel)
-       {
-           actualLevel++;
-           scaleObjetive = scaleLevelsInterval * actualLevel;
-       }
+        //calculate what value the bubble needs to growth or decreasse
+        float magnitude = (scaleFactor * scaleObjetive).x - trans.localScale.x;
+        magnitude = magnitude / Mathf.Abs(magnitude);
+
+        //actual scale aniamtion
+        trans.localScale += Vector3.one * (animationGrothSpeed * deltaTime) * magnitude;
     }
 
     void continousGrowing(float deltaTime)
     {
-       if (actualLevel < maxLevel)
-       {
-           //crecimiento por tiempo
-           scaleObjetive += scaleLevelsInterval / GrowSpeedSeconds * deltaTime;
+        if (actualLevel < maxLevel)
+        {
+            //crecimiento por tiempo
+            scaleObjetive += radiusLevelsInterval / growSpeedSeconds * deltaTime;
 
-           if (scaleObjetive / scaleLevelsInterval > actualLevel + 1)
-           {
-               actualLevel++;
-           }
-    
-       }
+            if (scaleObjetive / radiusLevelsInterval > actualLevel + 1)
+            {
+                actualLevel++;
+            }
+
+        }
     }
 
     void increaseBubbleOnHit(float percentageIncreased)
