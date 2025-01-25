@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class MainPompaBehavior : MonoBehaviour
 {
 
+
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -37,13 +38,20 @@ public class MainPompaBehavior : MonoBehaviour
     float invulnerableCountDown = 0.0f;
     bool bubbleIsInvulnerable = false;
 
+
+
+    //array de materiales
+    public Material[] materiales;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         trans = transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
-        scaleFactor = transform.localScale;
+        scaleFactor = trans.localScale;
+        materiales = new Material[maxLevel];
     }
 
     // Update is called once per frame
@@ -67,7 +75,16 @@ public class MainPompaBehavior : MonoBehaviour
 
         bubbleGrowth(delta);
 
+        setMaterialByLevel();
+
     }
+
+
+    void setMaterialByLevel()
+    {
+        spriteRenderer.material = materiales[actualLevel-1];
+    }
+
 
     void bubbleGrowth(float deltaTime)
     {
