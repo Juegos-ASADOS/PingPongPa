@@ -226,4 +226,10 @@ public class MainPompaBehavior : MonoBehaviour
 
         OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        decreaseToLowerLevel();
+        other.GetComponent<PinchoParry>().MainBubbleCollided();
+    }
 }

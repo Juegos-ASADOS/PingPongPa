@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public int Score;
+
+    int playersSpawned;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -62,4 +65,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void PlayerSpawned(PlayerInput playerInput)
+    {
+        playersSpawned++;
+
+        playerInput.GetComponent<PlayerController>().Init(playersSpawned);
+    }
 }
