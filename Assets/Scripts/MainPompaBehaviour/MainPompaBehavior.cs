@@ -194,7 +194,6 @@ public class MainPompaBehavior : MonoBehaviour
     void increaseBubbleOnHit(float percentageIncreased)
     {
         if (actualLevel >= maxLevel)
-            audio.Play();
             return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
@@ -206,6 +205,7 @@ public class MainPompaBehavior : MonoBehaviour
         if (actualLevel > maxLevel)
         {
             actualLevel = maxLevel;
+            audio.Play();
             scaleObjetive = actualLevel * radiusLevelsInterval;
         }
         else
