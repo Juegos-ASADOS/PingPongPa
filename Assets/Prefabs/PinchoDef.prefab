@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558e14b0514bda545b3c6520ddd9ff94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructionParticleSystem: {fileID: 3083230687053104100, guid: 9a4754428b162f14abed8279c794bdb1, type: 3}
   remainingHits: 2
   colors:
   - {r: 1, g: 0, b: 0.80864334, a: 1}

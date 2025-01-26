@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7864608111311892990}
   - component: {fileID: 4676107049831876621}
   - component: {fileID: 8978631792716297511}
+  - component: {fileID: 6054812380882624634}
   m_Layer: 6
   m_Name: PinchoExplosion
   m_TagString: Untagged
@@ -48,9 +49,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4891,3 +4892,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6054812380882624634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083230687053104100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d1980e5a52f924c901240a5bb23a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
