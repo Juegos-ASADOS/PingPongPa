@@ -147,12 +147,14 @@ public class MainPompaBehavior : MonoBehaviour
                 {
                     actualLevelColor = (float)LevelColor.LEVEL1;
                     nextLevelColor = (float)LevelColor.LEVEL2;
+                    bubbleMaterial.SetInt("_Damaged", 1);
                 }
                 break;
             case 1:
                 {
                     actualLevelColor = (float)LevelColor.LEVEL2;
                     nextLevelColor = (float)LevelColor.LEVEL3;
+                    bubbleMaterial.SetInt("_Damaged", 0);
                 }
                 break;
             case 2:
@@ -188,13 +190,7 @@ public class MainPompaBehavior : MonoBehaviour
             scaleObjetive += radiusLevelsInterval / growSpeedSeconds * deltaTime;
 
             if (scaleObjetive > (actualLevel + 1) * radiusLevelsInterval + initScale)
-            {
-
-                if (actualLevel == 1)
-                {
-                    // Change material
-                    bubbleMaterial.SetInt("_Damaged", 0);
-                }
+            {             
                 actualLevel++;
             }
             //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
@@ -224,12 +220,6 @@ public class MainPompaBehavior : MonoBehaviour
     {
         if (actualLevel >= maxLevel - 1)
             return;
-
-        if (actualLevel == 1)
-        {
-            // Change material
-            bubbleMaterial.SetInt("_Damaged", 0);
-        }
 
         float sum = radiusLevelsInterval * percentageIncreased;
 
@@ -275,9 +265,6 @@ public class MainPompaBehavior : MonoBehaviour
         {
             audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
-
-            // Change material
-            bubbleMaterial.SetInt("_Damaged", 1);
         }
     }
 
