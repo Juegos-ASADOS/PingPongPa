@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  reboundTime: 1
+  reboundTime: 0.6
   animator: {fileID: 5957835550154264444}
   spriteRenderer: {fileID: 4417005661821824773}
   spriteRendererFlare: {fileID: 8747503763705096974}
@@ -684,7 +684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5a7813ac6f548a8b5ef73bce5084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reboundForce: 50
+  reboundForce: 30
+  parryPlayerMulti: 6.5
 --- !u!61 &1409446936363775594
 BoxCollider2D:
   m_ObjectHideFlags: 0
