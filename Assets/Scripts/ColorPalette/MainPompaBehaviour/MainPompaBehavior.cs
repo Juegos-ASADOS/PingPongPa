@@ -306,6 +306,8 @@ public class MainPompaBehavior : MonoBehaviour
     {
         playerSpawns[indxSpawn].GetComponent<Animator>().SetTrigger("game");
         playerSpawns[indxSpawn].GetComponent<SpawnPlayer>().player = player.gameObject;
+        indxSpawn++;
+
         Transform playerTr = player.transform.GetChild(0);
 
         Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
