@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     [SerializeField]
     SpriteRenderer spriteRenderer;
+    [SerializeField]
+    SpriteRenderer spriteRendererFlare;
 
     [SerializeField]
     RuntimeAnimatorController[] controllers;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     bool onRebound = false;
 
+    Color[] colorPlayers = { new Color(0.259f, 0.863f, 0.737f), new Color(1.0f, 0.631f, 0.773f) };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,7 +44,11 @@ public class PlayerController : MonoBehaviour
         playerId = (PlayerIDs)id;        
         animator.runtimeAnimatorController = controllers[id - 1];
         transform.localEulerAngles = new Vector3(0, 0, 180 * (id - 1));
-
+        Material mat = spriteRendererFlare.material;
+        if (mat && mat.HasProperty("_Color"))
+        {
+            mat.SetColor("_Color", colorPlayers[id-1]);
+        }
         GetComponentInChildren<ShieldBehaviour>(true).Init(playerId);
     }
 
