@@ -226,7 +226,7 @@ public class MainPompaBehavior : MonoBehaviour
 
         actualLevel = (int)((scaleObjetive - initScale) / radiusLevelsInterval);
 
-        if (actualLevel > maxLevel - 1)
+        if (actualLevel >= maxLevel - 1)
         {
             actualLevel = maxLevel;
             audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
@@ -260,7 +260,7 @@ public class MainPompaBehavior : MonoBehaviour
         if (actualLevel >= 1)
             //Animation
             playBounceAnimation();
-        if (actualLevel == 1)
+        if (actualLevel == 0)
         {
             audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
@@ -284,7 +284,7 @@ public class MainPompaBehavior : MonoBehaviour
 
     void playBounceAnimation()
     {
-        if(animator != null)
+        if (animator != null)
             animator.SetTrigger("BubbleBounce");
     }
 

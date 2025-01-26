@@ -96,6 +96,7 @@ MonoBehaviour:
   _spikeDestroyed: {fileID: 8300000, guid: effe281d3662a8748952182d0095b4ae, type: 3}
   _bubbleSpawned: {fileID: 8300000, guid: 6240e881c75d42c4aa101712bd3e8857, type: 3}
   _bubbleHit: {fileID: 8300000, guid: 8042048f9a899c241abc23302b4ed3fa, type: 3}
+  _bubblePopped: {fileID: 8300000, guid: 3a1656fded2040b4d8b90679f12003ff, type: 3}
 --- !u!212 &6001467911709157394
 SpriteRenderer:
   m_ObjectHideFlags: 0
