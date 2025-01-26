@@ -26,12 +26,17 @@ public class LeaderBoardManager : MonoBehaviour
 
     public void TryToAddScore(int score)
     {
-        if (leaderBoard.Last() >= score)
+        if (leaderBoard.Count > 0 && leaderBoard.Last() >= score)
             return;
 
         leaderBoard.Add(score);
         leaderBoard.Sort();
         leaderBoard.Reverse();
+
+        if (leaderBoard.Count > numPlayersToShow)
+        {
+            leaderBoard.RemoveAt(numPlayersToShow);
+        }
     }
 
     private void OnApplicationQuit()
