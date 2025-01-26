@@ -20,6 +20,8 @@ public class TinyBubbleParry : MonoBehaviour
     AudioClip _bubbleSpawned;
     [SerializeField]
     AudioClip _bubbleHit;
+    [SerializeField]
+    AudioClip _bubblePopped;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,7 +63,7 @@ public class TinyBubbleParry : MonoBehaviour
     public void playBubbleExplosion()
     {
         Destroy(transform.gameObject.GetComponent<SpriteRenderer>());
-        
+
 
         GameObject vfxExplosion = Instantiate(bubbleExplosionVFX, transform);
         vfxExplosion.transform.SetParent(transform);
@@ -70,6 +72,8 @@ public class TinyBubbleParry : MonoBehaviour
         //Tiempo de vida de las particulas
         vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
         bubbleExplosion = true;
+
+        GameManager.Instance.PlaySound(_bubblePopped, 0.01f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
