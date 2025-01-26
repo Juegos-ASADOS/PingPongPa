@@ -14,6 +14,10 @@ public class PinchoParry : MonoBehaviour
     ColorChangePincho colorCntrl;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    //Sprites
+    SpriteRenderer _spriteRenderer;
+    public Sprite[] spikeFrames;
+
     //TrailAnchors
     Transform trailTransform;
     Transform[] trailsAnchors;
@@ -29,7 +33,7 @@ public class PinchoParry : MonoBehaviour
             GameObject anchor = Instantiate(new GameObject());
             anchor.transform.SetParent(tr);
             anchor.transform.localPosition = anchorPosition;
-            anchor.name = "TrailAnchor" + i;
+            anchor.name = "AnchorTrail" + i;
         }
     }
 
@@ -37,6 +41,9 @@ public class PinchoParry : MonoBehaviour
     {
         //Transform de la estela
         trailTransform = tr.Find("Trail").transform;
+        //SpriteRenderer
+        _spriteRenderer = tr.GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
 
         colorCntrl = GetComponent<ColorChangePincho>();
         switch (Random.Range(0, 2))
@@ -64,7 +71,7 @@ public class PinchoParry : MonoBehaviour
     void updateTrailAnchor()
     {
         string anchorId = "AnchorTrail" + (remainingHits-1);
-        trailTransform = tr.Find(anchorId);
+        trailTransform.localPosition = tr.Find(anchorId).localPosition;
     }
 
     public void hit(PlayerIDs p)
@@ -72,6 +79,7 @@ public class PinchoParry : MonoBehaviour
         if (p == spikeType)
         {
             remainingHits--;
+            _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
             switch (p)
             {
                 case PlayerIDs.PlayerA:
