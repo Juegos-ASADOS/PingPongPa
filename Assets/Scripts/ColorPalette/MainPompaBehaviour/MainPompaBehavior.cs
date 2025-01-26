@@ -299,13 +299,17 @@ public class MainPompaBehavior : MonoBehaviour
         vfxExplosion.transform.SetParent(tr);
         vfxExplosion.transform.GetChild(0).localScale = tr.localScale;
 
+        if (!bubbleExplosion)
+        {
+            audio.Stop();
+            GameManager.Instance.StopSound();
+            GameManager.Instance.PlaySound(lose, 0f);
+            GameManager.Instance.PlaySound(gameoverjingle, 0f);
+        }
+
         //Tiempo de vida de las particulas
         vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
         bubbleExplosion = true;
-        audio.Stop();
-        GameManager.Instance.StopSound();
-        GameManager.Instance.PlaySound(lose, 0f);
-        GameManager.Instance.PlaySound(gameoverjingle, 0f);
         OnBubbleDestroy.Invoke();
     }
 
