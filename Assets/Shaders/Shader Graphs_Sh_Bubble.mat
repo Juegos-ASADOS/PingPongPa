@@ -55,7 +55,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Frequency: 2
-    - _Level: 280
+    - _Level: 50
     - _MoveCenter: -0.5
     - _NoiseToTexture: 1
     - _QueueControl: 0

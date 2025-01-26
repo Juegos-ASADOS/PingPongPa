@@ -271,13 +271,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3458337610566279911, guid: 3c6950b106e3ccb4599a257b5d8349f0, type: 3}
+      propertyPath: leaderBoard.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6668122678551927819, guid: 3c6950b106e3ccb4599a257b5d8349f0, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6777919550095215712, guid: 3c6950b106e3ccb4599a257b5d8349f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7095130300550560115, guid: 3c6950b106e3ccb4599a257b5d8349f0, type: 3}
       propertyPath: timeToReset

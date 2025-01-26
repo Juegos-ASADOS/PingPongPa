@@ -65,6 +65,12 @@ public class GameManager : MonoBehaviour
         _canvasManager.SetLeaderBoard(_boardManager.GetElements());
     }
 
+    public void UpdateLeaderBoard()
+    {
+        _boardManager.TryToAddScore(Score);
+        _canvasManager.SetLeaderBoard(_boardManager.GetElements());
+    }
+
     private void LoadPersistantData()
     {
         //highScore
@@ -92,6 +98,9 @@ public class GameManager : MonoBehaviour
             if (resetTimer <= 0)
             {
                 gameFinished = false;
+                _boardManager.TryToAddScore(Score);
+                Score = 0;
+                UpdateCanvas();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -101,8 +110,9 @@ public class GameManager : MonoBehaviour
     {
         _mainAudioSource.pitch = Random.Range(1f - pitchVariance, 1f + pitchVariance);
         _mainAudioSource.PlayOneShot(clip);
-
     }
+
+    public void StopSound() { _mainAudioSource.Stop(); }
 
 
     public void PlayerSpawned(PlayerInput playerInput)

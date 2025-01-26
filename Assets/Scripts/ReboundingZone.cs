@@ -52,5 +52,9 @@ public class ReboundingZone : MonoBehaviour
             //spikeTransform.Rotate(new Vector3(0,0, rotationAngle));
 
         }
+        if (collision.gameObject.layer == 8)
+        {
+            collision.gameObject.GetComponent<TinyBubbleParry>().playBubbleExplosion();
+        }
     }
 }
