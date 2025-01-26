@@ -91,9 +91,12 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 moveValue = context.ReadValue<Vector2>();
-        int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
-        rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
-        rb.angularDamping = 0f;
+        if (Mathf.Abs(moveValue.x) > 0.2)
+        {            
+            int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
+            rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
+            rb.angularDamping = 0f;
+        } 
     }
 
     public void StopForRebound()
