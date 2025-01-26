@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    SpriteRenderer spriteRenderer;
 
     [SerializeField]
     RuntimeAnimatorController[] controllers;
@@ -50,24 +52,36 @@ public class PlayerController : MonoBehaviour
             reboundTimer += Time.deltaTime;
             if (reboundTimer > reboundTime)
             {
+                rb.angularVelocity = 0;
+                animator.SetTrigger("NoPegao");
                 onRebound = false;
             }
         }
+
+        animator.SetFloat("vel", Mathf.Abs(rb.angularVelocity));
+        if (rb.angularVelocity > 0) spriteRenderer.flipX = true;
+        else spriteRenderer.flipX = false;
     }
 
     public void OnMove(CallbackContext context)
     {
         if (onRebound || !GameManager.Instance.gameStarted)
             return;
+        if (context.canceled)
+        {
+            rb.angularVelocity = 0;
+            return;
+        }
 
         Vector2 moveValue = context.ReadValue<Vector2>();
         int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
-        rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
+        rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;        
         rb.angularDamping = 0f;
     }
 
     public void StopForRebound()
     {
+        animator.SetTrigger("Pegao");
         onRebound = true;
         reboundTimer = 0f;
         rb.angularDamping = 1f;
