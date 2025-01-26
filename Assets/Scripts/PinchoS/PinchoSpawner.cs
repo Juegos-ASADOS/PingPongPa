@@ -22,7 +22,9 @@ public class PinchoSpawner : MonoBehaviour
     //Variables privadas
     private float timeSincelastSpawn = 0.0f;
     private float lastAngle = 0.0f;
-
+    bool augmentedRate = false;
+    [SerializeField]
+    float augmentedTime = 2.35f;
 
     private void Start()
     {
@@ -57,6 +59,11 @@ public class PinchoSpawner : MonoBehaviour
             //Debug.Log("Playing animation");
             //anim.Play();
             //SpawnSpike();
+        }
+        if(GameManager.Instance.Score >= 120 && !augmentedRate)
+        {
+            augmentedRate = true;
+            timeBeetweenSpikes = augmentedTime;
         }
     }
 

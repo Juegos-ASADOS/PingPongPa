@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AudioClip _intro;
 
+    [SerializeField]
+    GameObject player1Text;
+
+    [SerializeField]
+    GameObject player2Text;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour
                 _boardManager.TryToAddScore(Score);
                 Score = 0;
                 UpdateCanvas();
+                player1Text.SetActive(true); player2Text.SetActive(true);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -122,7 +129,14 @@ public class GameManager : MonoBehaviour
         playerInput.GetComponent<PlayerController>().Init(playersSpawned);
 
         if (playersSpawned == 2)
+        {
             gameStarted = true;
+            player2Text.SetActive(false);
+        }
+        else
+        {
+            player1Text.SetActive(false);
+        }
     }
 
     public void PlayerDestroyed()
