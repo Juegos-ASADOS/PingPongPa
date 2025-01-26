@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceReturn: 50
   timeParry: 0.5
+  parrySound: {fileID: 8300000, guid: d272065e13e55554aa5af734bf2247cc, type: 3}
 --- !u!1 &1244008585236321619
 GameObject:
   m_ObjectHideFlags: 0
