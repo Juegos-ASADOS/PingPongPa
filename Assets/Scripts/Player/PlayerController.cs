@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum PlayerIDs { PlayerA = 1, PlayerB, Null = -1 }
@@ -73,7 +74,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        animator.SetFloat("vel", Mathf.Abs(rb.angularVelocity));
+        if(animator.gameObject.activeSelf)
+            animator.SetFloat("vel", Mathf.Abs(rb.angularVelocity));
         if (rb.angularVelocity > 0) spriteRenderer.flipX = true;
         else spriteRenderer.flipX = false;
     }
@@ -89,9 +91,12 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 moveValue = context.ReadValue<Vector2>();
-        int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
-        rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
-        rb.angularDamping = 0f;
+        if (Mathf.Abs(moveValue.x) > 0.2)
+        {            
+            int moveSign = (int)(moveValue.x / Mathf.Abs(moveValue.x));
+            rb.angularVelocity = -moveSign * speed * 1000 * Time.deltaTime / playerRealTr.localPosition.y;
+            rb.angularDamping = 0f;
+        } 
     }
 
     public void StopForRebound()
@@ -106,5 +111,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 newPos = new(playerRealTr.localPosition.x, newScale / 2f);
         playerRealTr.localPosition = newPos;
+    }
+
+    public void BubbleDestroyed()
+    {
+        animator.SetTrigger("Muelto");
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.PlayerDestroyed();
     }
 }

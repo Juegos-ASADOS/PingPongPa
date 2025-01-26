@@ -61,4 +61,10 @@ public class PlayerRebound : MonoBehaviour
                 Debug.LogError("No se encontró el componente TrailRenderer");
         }
     }
+
+    // Esto está aqui porque el animator lo tiene el hijo sorry
+    public void DeathEnd()
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }

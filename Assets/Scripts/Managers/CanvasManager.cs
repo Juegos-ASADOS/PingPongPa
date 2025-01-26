@@ -21,6 +21,10 @@ public class CanvasManager : MonoBehaviour
 
     public void SetLeaderBoard(List<int> elements)
     {
+        for (int i = _leaderBoardElementsParent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_leaderBoardElementsParent.GetChild(i).gameObject);
+        }
         int index = 1;
         foreach (var element in elements)
         {

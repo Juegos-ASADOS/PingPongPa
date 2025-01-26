@@ -10,7 +10,6 @@ public class MainPompaBehavior : MonoBehaviour
     //How many seconds it takes for the bubble to grow to the next level.
     public float growSpeedSeconds = 5.0f;
 
-
     //max level into wich it stop growing
     public int maxLevel = 5;
 
@@ -41,6 +40,7 @@ public class MainPompaBehavior : MonoBehaviour
     private Material bubbleMaterial;
 
     public UnityEvent<float> OnSizeChange;
+    public UnityEvent OnBubbleDestroy;
 
     //Color de la burbuja
     float actualLevelColor;
@@ -64,6 +64,10 @@ public class MainPompaBehavior : MonoBehaviour
     AudioClip lostHealth;
     [SerializeField]
     AudioClip gainHealth;
+    [SerializeField]
+    AudioClip lose;
+    [SerializeField]
+    AudioClip gameoverjingle;
 
 #if DEBUG
     bool debugDeath = true;
@@ -93,7 +97,7 @@ public class MainPompaBehavior : MonoBehaviour
     {
 
 #if DEBUG
-        
+
         // Debug Input Input
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -143,12 +147,14 @@ public class MainPompaBehavior : MonoBehaviour
                 {
                     actualLevelColor = (float)LevelColor.LEVEL1;
                     nextLevelColor = (float)LevelColor.LEVEL2;
+                    bubbleMaterial.SetInt("_Damaged", 1);
                 }
                 break;
             case 1:
                 {
                     actualLevelColor = (float)LevelColor.LEVEL2;
                     nextLevelColor = (float)LevelColor.LEVEL3;
+                    bubbleMaterial.SetInt("_Damaged", 0);
                 }
                 break;
             case 2:
@@ -172,23 +178,23 @@ public class MainPompaBehavior : MonoBehaviour
         }
 
         //Color Lerp
-        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, (scaleObjetive-(initScale + radiusLevelsInterval*actualLevel))/radiusLevelsInterval));
+        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, (scaleObjetive - (initScale + radiusLevelsInterval * actualLevel)) / radiusLevelsInterval));
     }
 
 
     void bubbleGrowth(float deltaTime)
     {
-        if (actualLevel < maxLevel -1)
+        if (actualLevel < maxLevel - 1)
         {
             //crecimiento por tiempo
             scaleObjetive += radiusLevelsInterval / growSpeedSeconds * deltaTime;
 
             if (scaleObjetive > (actualLevel + 1) * radiusLevelsInterval + initScale)
-            {
+            {             
                 actualLevel++;
             }
             //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
-            tr.localScale = scaleFactor * scaleObjetive;            
+            tr.localScale = scaleFactor * scaleObjetive;
 
             OnSizeChange.Invoke(tr.localScale.y);
         }
@@ -202,7 +208,9 @@ public class MainPompaBehavior : MonoBehaviour
             vfxExplosionLifeTime -= deltaTime;
 
             if (vfxExplosionLifeTime <= 0)
+            {
                 Destroy(this.gameObject);
+            }
         }
     }
 
@@ -217,9 +225,9 @@ public class MainPompaBehavior : MonoBehaviour
 
         scaleObjetive += sum;
 
-        actualLevel = (int)((scaleObjetive - initScale) / radiusLevelsInterval);        
+        actualLevel = (int)((scaleObjetive - initScale) / radiusLevelsInterval);
 
-        if (actualLevel > maxLevel -1)
+        if (actualLevel >= maxLevel - 1)
         {
             actualLevel = maxLevel;
             audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
@@ -238,8 +246,11 @@ public class MainPompaBehavior : MonoBehaviour
 
     void decreaseToLowerLevel()
     {
-        if (actualLevel <= 0)
+        if (actualLevel < 0)
+        {
+            playBubbleExplosion();
             return;
+        }
 
         actualLevel--;
         scaleObjetive = actualLevel * radiusLevelsInterval + initScale;
@@ -250,9 +261,9 @@ public class MainPompaBehavior : MonoBehaviour
         if (actualLevel >= 1)
             //Animation
             playBounceAnimation();
-        if (actualLevel == 1)
+        if (actualLevel == 0)
         {
-            audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
+            audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
         }
     }
@@ -274,7 +285,8 @@ public class MainPompaBehavior : MonoBehaviour
 
     void playBounceAnimation()
     {
-        animator.SetTrigger("BubbleBounce");
+        if (animator != null)
+            animator.SetTrigger("BubbleBounce");
     }
 
     void playBubbleExplosion()
@@ -287,10 +299,18 @@ public class MainPompaBehavior : MonoBehaviour
         vfxExplosion.transform.SetParent(tr);
         vfxExplosion.transform.GetChild(0).localScale = tr.localScale;
 
+        if (!bubbleExplosion)
+        {
+            audio.Stop();
+            GameManager.Instance.StopSound();
+            GameManager.Instance.PlaySound(lose, 0f);
+            GameManager.Instance.PlaySound(gameoverjingle, 0f);
+        }
+
         //Tiempo de vida de las particulas
         vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
         bubbleExplosion = true;
-
+        OnBubbleDestroy.Invoke();
     }
 
     public void PlayerSpawned(PlayerInput player)
@@ -304,7 +324,10 @@ public class MainPompaBehavior : MonoBehaviour
         Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
         playerTr.SetLocalPositionAndRotation(playerPos, playerTr.localRotation);
 
-        OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
+        PlayerController pc = player.GetComponent<PlayerController>();
+        OnSizeChange.AddListener(pc.BubbleSizeChanged);
+        OnBubbleDestroy.AddListener(pc.BubbleDestroyed);
+        GameManager.Instance.PlayerSpawned(player);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

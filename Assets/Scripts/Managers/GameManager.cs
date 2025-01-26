@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,9 +26,24 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool gameStarted = false;
+    bool gameFinished = false;
+
+    [SerializeField]
+    float timeToReset;
+    float resetTimer;
+
+    AudioSource _mainAudioSource;
 
     [SerializeField]
     AudioClip _mainLoop;
+    [SerializeField]
+    AudioClip _intro;
+
+    [SerializeField]
+    GameObject player1Text;
+
+    [SerializeField]
+    GameObject player2Text;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -46,11 +62,18 @@ public class GameManager : MonoBehaviour
         UpdateCanvas();
 
         secondsPerScore = 1 / scorePerSecond;
+        _mainAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void UpdateCanvas()
     {
         _canvasManager.SetScoreText(Score);
+        _canvasManager.SetLeaderBoard(_boardManager.GetElements());
+    }
+
+    public void UpdateLeaderBoard()
+    {
+        _boardManager.TryToAddScore(Score);
         _canvasManager.SetLeaderBoard(_boardManager.GetElements());
     }
 
@@ -62,17 +85,41 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameStarted)
+        if (!gameStarted && !gameFinished)
             return;
 
-        accumulatedTime += Time.deltaTime;
-        if (accumulatedTime > secondsPerScore)
+        if (gameStarted)
         {
-            accumulatedTime -= secondsPerScore;
-            Score++;
-            _canvasManager.SetScoreText(Score);
+            accumulatedTime += Time.deltaTime;
+            if (accumulatedTime > secondsPerScore)
+            {
+                accumulatedTime -= secondsPerScore;
+                Score++;
+                _canvasManager.SetScoreText(Score);
+            }
+        }
+        else if (gameFinished)
+        {
+            resetTimer -= Time.deltaTime;
+            if (resetTimer <= 0)
+            {
+                gameFinished = false;
+                _boardManager.TryToAddScore(Score);
+                Score = 0;
+                UpdateCanvas();
+                player1Text.SetActive(true); player2Text.SetActive(true);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
+
+    public void PlaySound(AudioClip clip, float pitchVariance)
+    {
+        _mainAudioSource.pitch = Random.Range(1f - pitchVariance, 1f + pitchVariance);
+        _mainAudioSource.PlayOneShot(clip);
+    }
+
+    public void StopSound() { _mainAudioSource.Stop(); }
 
 
     public void PlayerSpawned(PlayerInput playerInput)
@@ -82,7 +129,27 @@ public class GameManager : MonoBehaviour
         playerInput.GetComponent<PlayerController>().Init(playersSpawned);
 
         if (playersSpawned == 2)
+        {
             gameStarted = true;
+            player2Text.SetActive(false);
+        }
+        else
+        {
+            player1Text.SetActive(false);
+        }
+    }
+
+    public void PlayerDestroyed()
+    {
+        playersSpawned--;
+
+        if (playersSpawned == 0)
+        {
+            gameFinished = true;
+            gameStarted = false;
+            resetTimer = timeToReset;
+            Destroy(PlayerInputManager.instance.gameObject);
+        }
     }
 
     private void Start()
@@ -92,9 +159,11 @@ public class GameManager : MonoBehaviour
 
     public void SetMusicTransition()
     {
-        AudioSource ogSrc = GetComponent<AudioSource>();
+        AudioSource ogSrc = gameObject.AddComponent<AudioSource>();
         AudioSource newSrc = gameObject.AddComponent<AudioSource>();
+        ogSrc.playOnAwake = false;
         newSrc.playOnAwake = false;
+        ogSrc.clip = _intro;
         newSrc.clip = _mainLoop;
         newSrc.loop = true;
 
