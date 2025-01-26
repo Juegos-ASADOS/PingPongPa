@@ -21,6 +21,11 @@ public class ReboundingZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //El pincho desaparece al chocarse con la pompa, y se llama a este método, que me jode los sonidos, esta comprobacion nos aseguramos que solo se lame solo si sale realmente
+        if (collision.gameObject.transform.position.magnitude < 2.5f)
+        {
+            return;
+        }
 
         if (collision.gameObject.layer == SPIKELAYER)
         {

@@ -174,6 +174,8 @@ MonoBehaviour:
   - {fileID: 0}
   maxHealth: {fileID: 8300000, guid: 33f4bb818dd13e54580b18bda32d15cc, type: 3}
   lowHealth: {fileID: 8300000, guid: 6d6cd7b489a8ae945b13173887856d04, type: 3}
+  lostHealth: {fileID: 8300000, guid: f681e709c5216544499e0e0a44e4a685, type: 3}
+  gainHealth: {fileID: 8300000, guid: abe840216c397ef4eae0774d6b14b6e6, type: 3}
 --- !u!58 &4518639356268104061
 CircleCollider2D:
   m_ObjectHideFlags: 0
