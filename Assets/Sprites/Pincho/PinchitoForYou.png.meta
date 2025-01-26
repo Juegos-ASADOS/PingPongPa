@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PinchitoForYou_0: 2957237867983796300
+      PinchitoForYou_1: -4294754418918401934
+      PinchitoForYou_2: -9008770182090925361
+      PinchitoForYou_3: -9109575443932483447
+      PinchitoForYou_4: -3068779541192641246
+      PinchitoForYou_5: -4768946686937465407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
