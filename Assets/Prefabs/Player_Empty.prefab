@@ -348,11 +348,15 @@ MonoBehaviour:
   speed: 10
   reboundTime: 0.6
   animator: {fileID: 5957835550154264444}
+  bubbleAnimator: {fileID: 1072882781677584965}
   spriteRenderer: {fileID: 4417005661821824773}
   spriteRendererFlare: {fileID: 8747503763705096974}
   controllers:
   - {fileID: 9100000, guid: a6ab2a73295c2534999c840df94b1fcb, type: 2}
   - {fileID: 9100000, guid: c4dbbb99b482b264f834e093ba334acc, type: 2}
+  bubbleControllers:
+  - {fileID: 9100000, guid: c7f61fc6e92257a4fa2487aa6892e5f8, type: 2}
+  - {fileID: 9100000, guid: b33db7d57987b3146a50749ca9db1c00, type: 2}
   playerRealTr: {fileID: 1107333475329581561}
 --- !u!96 &7166137574161767802
 TrailRenderer:

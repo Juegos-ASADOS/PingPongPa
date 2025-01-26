@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
     [SerializeField]
-    Animator animator;
+    Animator animator, bubbleAnimator;
     [SerializeField]
     SpriteRenderer spriteRenderer;
     [SerializeField]
     SpriteRenderer spriteRendererFlare;
 
     [SerializeField]
-    RuntimeAnimatorController[] controllers;
+    RuntimeAnimatorController[] controllers, bubbleControllers;
 
     [SerializeField]
     Transform playerRealTr;
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         playerId = (PlayerIDs)id;        
         animator.runtimeAnimatorController = controllers[id - 1];
+        bubbleAnimator.runtimeAnimatorController = bubbleControllers[id - 1];
         transform.localEulerAngles = new Vector3(0, 0, 180 * (id - 1));
         Material mat = spriteRendererFlare.material;
         if (mat && mat.HasProperty("_Color"))
