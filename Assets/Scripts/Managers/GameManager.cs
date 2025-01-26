@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     public int Score;
 
     int playersSpawned;
+
+    [HideInInspector]
+    public bool gameStarted = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -56,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!gameStarted)
+            return;
+
         accumulatedTime += Time.deltaTime;
         if (accumulatedTime > secondsPerScore)
         {
@@ -71,5 +78,8 @@ public class GameManager : MonoBehaviour
         playersSpawned++;
 
         playerInput.GetComponent<PlayerController>().Init(playersSpawned);
+
+        if (playersSpawned == 2)
+            gameStarted = true;
     }
 }
