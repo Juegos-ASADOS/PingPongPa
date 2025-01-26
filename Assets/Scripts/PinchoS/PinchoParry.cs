@@ -30,6 +30,8 @@ public class PinchoParry : MonoBehaviour
     AudioClip _hitClip;
     [SerializeField]
     AudioClip _collidedCLip;
+    [SerializeField]
+    AudioClip _spawnClip;
 
     private void Awake()
     {
@@ -65,6 +67,9 @@ public class PinchoParry : MonoBehaviour
                 break;
         }
         colorCntrl.ChangeColorPincho((int)spikeType - 1);
+
+        _audioSource.pitch = UnityEngine.Random.Range(0.98f, 1.02f);
+        _audioSource.PlayOneShot(_spawnClip);
     }
 
     // Update is called once per frame

@@ -723,10 +723,6 @@ PrefabInstance:
       value: MainBubble
       objectReference: {fileID: 0}
     - target: {fileID: 8166275023330524819, guid: 680978b1064cfe5459e494dc305a8b87, type: 3}
-      propertyPath: playerSpawns.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8166275023330524819, guid: 680978b1064cfe5459e494dc305a8b87, type: 3}
       propertyPath: 'playerSpawns.Array.data[0]'
       value: 
       objectReference: {fileID: 1544715470}

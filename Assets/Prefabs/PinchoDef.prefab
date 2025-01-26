@@ -132,6 +132,7 @@ MonoBehaviour:
   anchorOffset: {x: 0, y: 0.5, z: 0}
   _hitClip: {fileID: 8300000, guid: 59c1c3dd0f0b7da49afba15c4eb30a7c, type: 3}
   _collidedCLip: {fileID: 8300000, guid: f681e709c5216544499e0e0a44e4a685, type: 3}
+  _spawnClip: {fileID: 8300000, guid: 2d8d371a63d56624ab9e8a46c8fde00e, type: 3}
 --- !u!114 &8347855482710590864
 MonoBehaviour:
   m_ObjectHideFlags: 0

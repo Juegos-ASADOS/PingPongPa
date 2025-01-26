@@ -169,6 +169,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   bubbleExplosionVFX: {fileID: 6378974188790151929, guid: 1bcf8f57c0fc92f459eefe1fa8c633e5, type: 3}
+  playerSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
   maxHealth: {fileID: 8300000, guid: 33f4bb818dd13e54580b18bda32d15cc, type: 3}
   lowHealth: {fileID: 8300000, guid: 6d6cd7b489a8ae945b13173887856d04, type: 3}
 --- !u!58 &4518639356268104061

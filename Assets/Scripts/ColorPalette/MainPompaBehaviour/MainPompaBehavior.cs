@@ -55,6 +55,7 @@ public class MainPompaBehavior : MonoBehaviour
     float vfxExplosionLifeTime;
     bool bubbleExplosion;
 
+    [SerializeField]
     GameObject[] playerSpawns;
     private int indxSpawn = 0;
     [SerializeField]
