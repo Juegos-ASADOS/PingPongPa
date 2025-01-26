@@ -94,7 +94,7 @@ public class MainPompaBehavior : MonoBehaviour
     {
 
 #if DEBUG
-        
+
         // Debug Input Input
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -173,13 +173,13 @@ public class MainPompaBehavior : MonoBehaviour
         }
 
         //Color Lerp
-        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, (scaleObjetive-(initScale + radiusLevelsInterval*actualLevel))/radiusLevelsInterval));
+        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, (scaleObjetive - (initScale + radiusLevelsInterval * actualLevel)) / radiusLevelsInterval));
     }
 
 
     void bubbleGrowth(float deltaTime)
     {
-        if (actualLevel < maxLevel -1)
+        if (actualLevel < maxLevel - 1)
         {
             //crecimiento por tiempo
             scaleObjetive += radiusLevelsInterval / growSpeedSeconds * deltaTime;
@@ -189,7 +189,7 @@ public class MainPompaBehavior : MonoBehaviour
                 actualLevel++;
             }
             //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
-            tr.localScale = scaleFactor * scaleObjetive;            
+            tr.localScale = scaleFactor * scaleObjetive;
 
             OnSizeChange.Invoke(tr.localScale.y);
         }
@@ -253,10 +253,10 @@ public class MainPompaBehavior : MonoBehaviour
             playBounceAnimation();
         if (actualLevel == 1)
         {
-            audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
+            audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
         }
-        else if(actualLevel <= 0)
+        else if (actualLevel <= 0)
         {
             playBubbleExplosion();
         }
@@ -309,7 +309,7 @@ public class MainPompaBehavior : MonoBehaviour
         Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
         playerTr.SetLocalPositionAndRotation(playerPos, playerTr.localRotation);
 
-        PlayerController pc = player.GetComponent<PlayerController>(); 
+        PlayerController pc = player.GetComponent<PlayerController>();
         OnSizeChange.AddListener(pc.BubbleSizeChanged);
         OnBubbleDestroy.AddListener(pc.BubbleDestroyed);
         GameManager.Instance.PlayerSpawned(player);
