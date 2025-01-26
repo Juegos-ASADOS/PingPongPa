@@ -6,6 +6,6 @@ public class SpawnPlayer : MonoBehaviour
     public void SpawnPlayerAssoc()
     {
         player.transform.GetChild(0).gameObject.SetActive(true);
-        Destroy(gameObject);
+        transform.parent.gameObject.SetActive(false);
     }
 }
