@@ -59,16 +59,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Frequency: 4
+    - _Frequency: 7.55
     - _Level: 0
     - _MoveCenter: -0.5
     - _NoiseToTexture: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScaleUV: 2.1
+    - _Scale: 0
+    - _ScaleUV: 2
     - _Speed: 0.15
     m_Colors:
-    - _BackgroundColor: {r: 0.3294115, g: 0.2509804, b: 0.48235294, a: 1}
-    - _DotColor: {r: 0.47058815, g: 0.372549, b: 0.7019608, a: 1}
+    - _BackgroundColor: {r: 0.1625578, g: 0.09487359, b: 0.24528301, a: 1}
+    - _DotColor: {r: 0.32941177, g: 0.2509804, b: 0.48235294, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

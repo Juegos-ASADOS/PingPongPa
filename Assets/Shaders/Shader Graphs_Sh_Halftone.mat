@@ -53,9 +53,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 40
+    - _Scale: -108.4
     m_Colors:
-    - _BackgroundColor: {r: 1, g: 0.8901961, b: 0.9921568, a: 0}
-    - _DotColor: {r: 1, g: 0.62352943, b: 0.77254903, a: 0.45490196}
+    - _BackgroundColor: {r: 0.14509805, g: 0.11764706, b: 0.12941177, a: 0}
+    - _DotColor: {r: 0.14465404, g: 0.11690593, b: 0.12788954, a: 0.45490196}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
