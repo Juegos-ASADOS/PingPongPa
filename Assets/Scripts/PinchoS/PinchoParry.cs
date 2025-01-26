@@ -41,8 +41,14 @@ public class PinchoParry : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    public void Init(int hits)
+    {
         _audioSource = GetComponent<AudioSource>();
         tr = transform;
+        remainingHits = hits;
         for (int i = 0; i < remainingHits; i++)
         {
             Vector3 anchorPosition = anchorOffset * i;
@@ -52,10 +58,6 @@ public class PinchoParry : MonoBehaviour
             anchor.name = "AnchorTrail" + i;
             Destroy(go);
         }
-    }
-
-    void Start()
-    {
         //Transform de la estela
         trailTransform = tr.Find("Trail").transform;
         //SpriteRenderer

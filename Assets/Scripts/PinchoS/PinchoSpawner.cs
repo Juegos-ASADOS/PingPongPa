@@ -25,6 +25,7 @@ public class PinchoSpawner : MonoBehaviour
     bool augmentedRate = false;
     [SerializeField]
     float augmentedTime = 2.35f;
+    float threeChance = -1f;
 
     private void Start()
     {
@@ -51,6 +52,7 @@ public class PinchoSpawner : MonoBehaviour
 
             spawnObject = Instantiate(spawnPrefab, spawnPosition, Quaternion.identity);
             spawnObject.GetComponentInChildren<SpikeAnimation>().Init(gameObject);
+
             timeSincelastSpawn = 0;
             lastAngle = angle;
 
@@ -60,17 +62,23 @@ public class PinchoSpawner : MonoBehaviour
             //anim.Play();
             //SpawnSpike();
         }
-        if(GameManager.Instance.Score >= 120 && !augmentedRate)
+        if (GameManager.Instance.Score >= 120 && !augmentedRate)
         {
             augmentedRate = true;
             timeBeetweenSpikes = augmentedTime;
         }
+        else if (GameManager.Instance.Score >= 60 && threeChance < 0f)
+            threeChance = 0.25f;
     }
 
     public void SpawnSpike()
     {
         Destroy(spawnObject);
         GameObject newSpike = Instantiate(spikePrefab, spawnPosition, Quaternion.identity);
+        if (Random.Range(0, 1f) <= threeChance)
+            newSpike.GetComponent<PinchoParry>().Init(3);
+        else
+            newSpike.GetComponent<PinchoParry>().Init(2);
         //Calculo del vector hacia el centro.
 
         Vector3 direction = -newSpike.transform.position; //El mismo pero negado porque es PosFinal - PosInicial

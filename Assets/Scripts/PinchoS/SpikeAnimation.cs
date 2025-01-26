@@ -7,6 +7,7 @@ public class SpikeAnimation : MonoBehaviour
     {
         spikeSpawner = spawner;
     }
+
     public void spawnSpike()
     {
         spikeSpawner.GetComponent<PinchoSpawner>().SpawnSpike();

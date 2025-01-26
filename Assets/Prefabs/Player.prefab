@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678a8373fbb04044cbf88e32babbabe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 21.5
+  speed: 215
   reboundTime: 0.6
   animator: {fileID: 5957835550154264444}
   bubbleAnimator: {fileID: 1072882781677584965}
