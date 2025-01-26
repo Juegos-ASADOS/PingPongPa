@@ -596,6 +596,7 @@ MonoBehaviour:
   spikeSpeed: 50
   spikePrefab: {fileID: 9210002571197935720, guid: e7957bcc17503ed4d968b5b330199973, type: 3}
   angleBetweenSpikes: 5
+  spawnPrefab: {fileID: 0}
 --- !u!4 &1733026688
 Transform:
   m_ObjectHideFlags: 0

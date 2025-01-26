@@ -131,12 +131,12 @@ TextureImporter:
       name: PinchitoForYou_0
       rect:
         serializedVersion: 2
-        x: 425
-        y: 136
-        width: 150
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: PinchitoForYou_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 88
-        width: 100
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 200
+        y: 0
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,12 +175,12 @@ TextureImporter:
       name: PinchitoForYou_2
       rect:
         serializedVersion: 2
-        x: 450
-        y: 88
-        width: 100
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 400
+        y: 0
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,77 +193,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PinchitoForYou_3
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 18
-        width: 56
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 98078c9f569449180800000000000000
-      internalID: -9109575443932483447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PinchitoForYou_4
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 18
-        width: 56
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 225f93134418965d0800000000000000
-      internalID: -3068779541192641246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PinchitoForYou_5
-      rect:
-        serializedVersion: 2
-        x: 472
-        y: 18
-        width: 56
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1cdf054514c41ddb0800000000000000
-      internalID: -4768946686937465407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e2d6fb5a1d76ecb49971cad85c8d5d53
     internalID: 0
     vertices: []
     indices: 
@@ -272,7 +206,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PinchitoForYou_0: 2957237867983796300
+      PinchitoForYou_1: -4294754418918401934
+      PinchitoForYou_2: -9008770182090925361
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
