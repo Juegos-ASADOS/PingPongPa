@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3c3e9cf908cb7934b9fa2667ceecbcc6
+guid: d1f86e476c1344c408abdb87c5612010
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9069869967062415903
-    second: water-drop_0
+      213: -4174388702337806200
+    second: vida2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: water-drop_0
+      name: vida2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 867
-        height: 571
+        width: 1668
+        height: 1029
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e5c246b159512280800000000000000
-      internalID: -9069869967062415903
+      spriteID: 88050c297979116c0800000000000000
+      internalID: -4174388702337806200
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      water-drop_0: -9069869967062415903
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
