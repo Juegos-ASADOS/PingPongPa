@@ -5,8 +5,6 @@ public class TinyBubbleParry : MonoBehaviour
     [SerializeField]
     int remainingHits;
     [SerializeField]
-    Color[] colors = new Color[2];
-    Color spritecolor;
     float[] colorHue = new float[2];
     Material bubbleMaterial;
     bool parried;
@@ -45,8 +43,6 @@ public class TinyBubbleParry : MonoBehaviour
     {
         parried = true;
         bubbleMaterial.SetFloat("_Level", colorHue[1]);
-        spritecolor = colors[1];
-        gameObject.GetComponent<SpriteRenderer>().color = spritecolor;
 
         GameManager.Instance.PlaySound(_bubbleHit, 0.04f);
     }
@@ -62,7 +58,7 @@ public class TinyBubbleParry : MonoBehaviour
         }
     }
 
-    void playBubbleExplosion()
+    public void playBubbleExplosion()
     {
         Destroy(transform.gameObject.GetComponent<SpriteRenderer>());
         
