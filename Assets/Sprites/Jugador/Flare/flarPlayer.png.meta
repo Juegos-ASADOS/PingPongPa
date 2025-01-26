@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d1f86e476c1344c408abdb87c5612010
+guid: bd685be368fde8c47b770dc6dac6056a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4174388702337806200
-    second: vida2_0
+      213: -8504936648864265365
+    second: flarPlayer_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vida2_0
+      name: flarPlayer_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1668
-        height: 1029
+        width: 2224
+        height: 1668
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 88050c297979116c0800000000000000
-      internalID: -4174388702337806200
+      spriteID: b6b8e3fcd2568f980800000000000000
+      internalID: -8504936648864265365
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vida2_0: -4174388702337806200
+      flarPlayer_0: -8504936648864265365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
