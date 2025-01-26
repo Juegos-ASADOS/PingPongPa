@@ -54,7 +54,11 @@ public class PinchoParry : MonoBehaviour
         trailTransform = tr.Find("Trail").transform;
         //SpriteRenderer
         _spriteRenderer = tr.GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
+
+        if (remainingHits > 0)
+            _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
+        else
+            _spriteRenderer.sprite = spikeFrames[0];
 
         colorCntrl = GetComponent<ColorChangePincho>();
         switch (Random.Range(0, 2))
@@ -76,6 +80,7 @@ public class PinchoParry : MonoBehaviour
     void Update()
     {
         updateTrailAnchor();
+
         if (remainingHits <= 0)
         {
             Destroy(gameObject);
@@ -84,7 +89,12 @@ public class PinchoParry : MonoBehaviour
 
     void updateTrailAnchor()
     {
-        string anchorId = "AnchorTrail" + (remainingHits - 1);
+        string anchorId;
+        if (remainingHits > 0)
+            anchorId = "AnchorTrail" + (remainingHits - 1);
+        else
+            anchorId = "AnchorTrail0";
+
         trailTransform.localPosition = tr.Find(anchorId).localPosition;
     }
 
@@ -93,7 +103,12 @@ public class PinchoParry : MonoBehaviour
         if (p == spikeType)
         {
             remainingHits--;
-            _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
+
+            if (remainingHits > 0)
+                _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
+            else
+                _spriteRenderer.sprite = spikeFrames[0];
+
             switch (p)
             {
                 case PlayerIDs.PlayerA:
