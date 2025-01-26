@@ -10,7 +10,6 @@ public class MainPompaBehavior : MonoBehaviour
     //How many seconds it takes for the bubble to grow to the next level.
     public float growSpeedSeconds = 5.0f;
 
-
     //max level into wich it stop growing
     public int maxLevel = 5;
 
@@ -190,6 +189,12 @@ public class MainPompaBehavior : MonoBehaviour
 
             if (scaleObjetive > (actualLevel + 1) * radiusLevelsInterval + initScale)
             {
+
+                if (actualLevel == 1)
+                {
+                    // Change material
+                    bubbleMaterial.SetInt("_Damaged", 0);
+                }
                 actualLevel++;
             }
             //actual scale animation (we would use it in case we want the bubble to scale rapidly to a point instead of instantly)
@@ -219,6 +224,12 @@ public class MainPompaBehavior : MonoBehaviour
     {
         if (actualLevel >= maxLevel - 1)
             return;
+
+        if (actualLevel == 1)
+        {
+            // Change material
+            bubbleMaterial.SetInt("_Damaged", 0);
+        }
 
         float sum = radiusLevelsInterval * percentageIncreased;
 
@@ -264,6 +275,9 @@ public class MainPompaBehavior : MonoBehaviour
         {
             audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
+
+            // Change material
+            bubbleMaterial.SetInt("_Damaged", 1);
         }
     }
 
