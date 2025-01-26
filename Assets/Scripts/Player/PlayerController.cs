@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
                 rb.angularVelocity = 0;
                 animator.SetTrigger("NoPegao");
                 onRebound = false;
+                GetComponentInChildren<TrailRenderer>().enabled = false;    //Desactivamos el trail Renderer del empujón con el otro jugador
             }
         }
 

@@ -52,6 +52,13 @@ public class PlayerRebound : MonoBehaviour
             }
             rb.AddTorque(reboundForce * multipl * reboundSign / transform.localPosition.y);
             playerController.StopForRebound();
+
+            //Activacion del trailRenderer del pushBack
+            TrailRenderer pushBackTrail = transform.parent.GetComponentInChildren<TrailRenderer>();
+            if (pushBackTrail != null)
+                pushBackTrail.enabled = true;
+            else
+                Debug.LogError("No se encontró el componente TrailRenderer");
         }
     }
 }
