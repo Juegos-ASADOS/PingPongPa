@@ -239,8 +239,11 @@ public class MainPompaBehavior : MonoBehaviour
 
     void decreaseToLowerLevel()
     {
-        if (actualLevel <= 0)
+        if (actualLevel < 0)
+        {
+            playBubbleExplosion();
             return;
+        }
 
         actualLevel--;
         scaleObjetive = actualLevel * radiusLevelsInterval + initScale;
@@ -255,10 +258,6 @@ public class MainPompaBehavior : MonoBehaviour
         {
             audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
             audio.PlayOneShot(lowHealth);
-        }
-        else if(actualLevel <= 0)
-        {
-            playBubbleExplosion();
         }
     }
 
