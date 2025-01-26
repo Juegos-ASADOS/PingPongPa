@@ -103,6 +103,6 @@ public class GameManager : MonoBehaviour
         ogSrc.PlayScheduled(introStartTime);
         newSrc.PlayScheduled(sourceStartTime);
 
-        Destroy(ogSrc, ogSrc.clip.length * 0.1f);
+        Destroy(ogSrc, ogSrc.clip.length + 0.1f);
     }
 }
