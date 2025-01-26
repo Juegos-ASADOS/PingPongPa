@@ -54,6 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Damaged: 0
     - _Frequency: 2
     - _Level: 50
     - _MoveCenter: -0.5
