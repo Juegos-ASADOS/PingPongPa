@@ -29,7 +29,7 @@ public class PinchoParry : MonoBehaviour
         tr = transform;
         for(int i = 0; i < remainingHits; i++)
         {
-            Vector3 anchorPosition = tr.localPosition + anchorOffset * i;
+            Vector3 anchorPosition = anchorOffset * i;
             GameObject anchor = Instantiate(new GameObject());
             anchor.transform.SetParent(tr);
             anchor.transform.localPosition = anchorPosition;
