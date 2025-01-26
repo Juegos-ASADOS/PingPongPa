@@ -39,7 +39,7 @@ public class ShieldBehaviour : MonoBehaviour
             Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
             other.GetComponent<TinyBubble>().SetVelocity(dir.normalized * forceReturn);
 
-            other.GetComponent<TinyBubbleParry>().hit();
+            other.GetComponent<TinyBubbleParry>().Hit();
         }
     }
 

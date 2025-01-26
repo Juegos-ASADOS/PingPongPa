@@ -23,7 +23,7 @@ public class TinyBubbleParry : MonoBehaviour
         }
     }
 
-    public void hit()
+    public void Hit()
     {
         spritecolor = colors[1];
         gameObject.GetComponent<SpriteRenderer>().color = spritecolor;
