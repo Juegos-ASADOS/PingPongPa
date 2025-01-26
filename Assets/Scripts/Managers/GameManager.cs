@@ -26,8 +26,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool gameStarted = false;
 
+    AudioSource _mainAudioSource;
+
     [SerializeField]
     AudioClip _mainLoop;
+    [SerializeField]
+    AudioClip _intro;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
         UpdateCanvas();
 
         secondsPerScore = 1 / scorePerSecond;
+        _mainAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void UpdateCanvas()
@@ -74,6 +79,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlaySound(AudioClip clip, float pitchVariance)
+    {
+        _mainAudioSource.pitch = Random.Range(1f - pitchVariance, 1f + pitchVariance);
+        _mainAudioSource.PlayOneShot(clip);
+
+    }
+
 
     public void PlayerSpawned(PlayerInput playerInput)
     {
@@ -92,9 +104,11 @@ public class GameManager : MonoBehaviour
 
     public void SetMusicTransition()
     {
-        AudioSource ogSrc = GetComponent<AudioSource>();
+        AudioSource ogSrc = gameObject.AddComponent<AudioSource>();
         AudioSource newSrc = gameObject.AddComponent<AudioSource>();
+        ogSrc.playOnAwake = false;
         newSrc.playOnAwake = false;
+        ogSrc.clip = _intro;
         newSrc.clip = _mainLoop;
         newSrc.loop = true;
 

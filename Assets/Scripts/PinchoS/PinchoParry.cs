@@ -32,6 +32,8 @@ public class PinchoParry : MonoBehaviour
     AudioClip _collidedCLip;
     [SerializeField]
     AudioClip _spawnClip;
+    [SerializeField]
+    AudioClip _destroyedClip;
 
     private void Awake()
     {
@@ -83,6 +85,7 @@ public class PinchoParry : MonoBehaviour
 
         if (remainingHits <= 0)
         {
+            GameManager.Instance.PlaySound(_destroyedClip, 0.02f);
             Destroy(gameObject);
         }
     }
