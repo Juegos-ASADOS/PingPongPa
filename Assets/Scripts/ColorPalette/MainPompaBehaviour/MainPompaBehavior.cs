@@ -84,7 +84,8 @@ public class MainPompaBehavior : MonoBehaviour
         nextLevelColor = (float)LevelColor.LEVEL2; //TODO
         bubbleExplosion = false;
         vfxExplosionLifeTime = 10.0f;
-        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, growSpeedSeconds));
+        bubbleMaterial.SetFloat("_Level", actualLevelColor);
+        tr.localScale = Vector3.one * scaleObjetive;
     }
 
 
@@ -140,35 +141,30 @@ public class MainPompaBehavior : MonoBehaviour
         {
             case 0:
                 {
-                    Debug.Log("1");
                     actualLevelColor = (float)LevelColor.LEVEL1;
                     nextLevelColor = (float)LevelColor.LEVEL2;
                 }
                 break;
             case 1:
                 {
-                    Debug.Log("2");
                     actualLevelColor = (float)LevelColor.LEVEL2;
                     nextLevelColor = (float)LevelColor.LEVEL3;
                 }
                 break;
             case 2:
                 {
-                    Debug.Log("3");
                     actualLevelColor = (float)LevelColor.LEVEL3;
                     nextLevelColor = (float)LevelColor.LEVEL4;
                 }
                 break;
             case 3:
                 {
-                    Debug.Log("4");
                     actualLevelColor = (float)LevelColor.LEVEL4;
                     nextLevelColor = (float)LevelColor.LEVEL5;
                 }
                 break;
             case 4:
                 {
-                    Debug.Log("5");
                     actualLevelColor = (float)LevelColor.LEVEL5;
                     nextLevelColor = (float)LevelColor.LEVEL5;
                 }
