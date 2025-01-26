@@ -188,9 +188,7 @@ MonoBehaviour:
   scorePerSecond: 1
   Score: 0
   gameStarted: 0
-  _introLoop: {fileID: 8300000, guid: 5008635a5f0e93b478dc55bbe8f09a80, type: 3}
-  _transition: {fileID: 8300000, guid: 970c8167e97c8c8499bf7029f6a3dbf0, type: 3}
-  _mainLoop: {fileID: 8300000, guid: 970c8167e97c8c8499bf7029f6a3dbf0, type: 3}
+  _mainLoop: {fileID: 8300000, guid: 660f166bb8e665d4c8ed4f8be0ce1881, type: 3}
 --- !u!114 &3458337610566279911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,8 +213,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7a8e442a479e2144fbccd33c593cc89f, type: 3}
-  m_Resource: {fileID: 8300000, guid: 7a8e442a479e2144fbccd33c593cc89f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8215acf7b84cef849b27dc66e7b7dd05, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8215acf7b84cef849b27dc66e7b7dd05, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
