@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool gameStarted = false;
+    bool gameFinished = false;
+
+    [SerializeField]
+    float timeToReset;
+    float resetTimer;
 
     AudioSource _mainAudioSource;
 
@@ -67,15 +73,27 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameStarted)
+        if (!gameStarted && !gameFinished)
             return;
 
-        accumulatedTime += Time.deltaTime;
-        if (accumulatedTime > secondsPerScore)
+        if (gameStarted)
         {
-            accumulatedTime -= secondsPerScore;
-            Score++;
-            _canvasManager.SetScoreText(Score);
+            accumulatedTime += Time.deltaTime;
+            if (accumulatedTime > secondsPerScore)
+            {
+                accumulatedTime -= secondsPerScore;
+                Score++;
+                _canvasManager.SetScoreText(Score);
+            }
+        }
+        else if (gameFinished)
+        {
+            resetTimer -= Time.deltaTime;
+            if (resetTimer <= 0)
+            {
+                gameFinished = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
@@ -95,6 +113,18 @@ public class GameManager : MonoBehaviour
 
         if (playersSpawned == 2)
             gameStarted = true;
+    }
+
+    public void PlayerDestroyed()
+    {
+        playersSpawned--;
+
+        if (playersSpawned == 0)
+        {
+            gameFinished = true;
+            gameStarted = false;
+            resetTimer = timeToReset;
+        }
     }
 
     private void Start()
