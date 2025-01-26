@@ -32,6 +32,11 @@ public class LeaderBoardManager : MonoBehaviour
         leaderBoard.Add(score);
         leaderBoard.Sort();
         leaderBoard.Reverse();
+
+        if (leaderBoard.Count > numPlayersToShow)
+        {
+            leaderBoard.RemoveAt(numPlayersToShow);
+        }
     }
 
     private void OnApplicationQuit()

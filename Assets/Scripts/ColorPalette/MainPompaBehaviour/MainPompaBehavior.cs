@@ -65,6 +65,10 @@ public class MainPompaBehavior : MonoBehaviour
     AudioClip lostHealth;
     [SerializeField]
     AudioClip gainHealth;
+    [SerializeField]
+    AudioClip lose;
+    [SerializeField]
+    AudioClip gameoverjingle;
 
 #if DEBUG
     bool debugDeath = true;
@@ -203,7 +207,9 @@ public class MainPompaBehavior : MonoBehaviour
             vfxExplosionLifeTime -= deltaTime;
 
             if (vfxExplosionLifeTime <= 0)
+            {
                 Destroy(this.gameObject);
+            }
         }
     }
 
@@ -218,9 +224,9 @@ public class MainPompaBehavior : MonoBehaviour
 
         scaleObjetive += sum;
 
-        actualLevel = (int)((scaleObjetive - initScale) / radiusLevelsInterval);        
+        actualLevel = (int)((scaleObjetive - initScale) / radiusLevelsInterval);
 
-        if (actualLevel > maxLevel -1)
+        if (actualLevel > maxLevel - 1)
         {
             actualLevel = maxLevel;
             audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
@@ -295,6 +301,10 @@ public class MainPompaBehavior : MonoBehaviour
         //Tiempo de vida de las particulas
         vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
         bubbleExplosion = true;
+        audio.Stop();
+        GameManager.Instance.StopSound();
+        GameManager.Instance.PlaySound(lose, 0f);
+        GameManager.Instance.PlaySound(gameoverjingle, 0f);
         OnBubbleDestroy.Invoke();
     }
 
