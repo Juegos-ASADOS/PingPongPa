@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -26,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool gameStarted = false;
+
+    [SerializeField]
+    AudioClip _mainLoop;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -81,5 +83,26 @@ public class GameManager : MonoBehaviour
 
         if (playersSpawned == 2)
             gameStarted = true;
+    }
+
+    private void Start()
+    {
+        SetMusicTransition();
+    }
+
+    public void SetMusicTransition()
+    {
+        AudioSource ogSrc = GetComponent<AudioSource>();
+        AudioSource newSrc = gameObject.AddComponent<AudioSource>();
+        newSrc.playOnAwake = false;
+        newSrc.clip = _mainLoop;
+        newSrc.loop = true;
+
+        double introStartTime = AudioSettings.dspTime + 0.2f;
+        double sourceStartTime = introStartTime + ogSrc.clip.length;
+        ogSrc.PlayScheduled(introStartTime);
+        newSrc.PlayScheduled(sourceStartTime);
+
+        Destroy(ogSrc, ogSrc.clip.length * 0.1f);
     }
 }
