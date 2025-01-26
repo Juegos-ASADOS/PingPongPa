@@ -23,7 +23,12 @@ public class PinchoSpawner : MonoBehaviour
     private float timeSincelastSpawn = 0.0f;
     private float lastAngle = 0.0f;
 
+
     private void Start()
+    {
+    }
+
+    private void Awake()
     {
     }
 
@@ -46,6 +51,8 @@ public class PinchoSpawner : MonoBehaviour
             spawnObject.GetComponentInChildren<SpikeAnimation>().Init(gameObject);
             timeSincelastSpawn = 0;
             lastAngle = angle;
+
+
             ////Animación de antes de que aparezca el pincho
             //Debug.Log("Playing animation");
             //anim.Play();

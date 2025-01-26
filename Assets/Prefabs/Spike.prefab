@@ -116,6 +116,10 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0, b: 0.80864334, a: 1}
   - {r: 0.039849162, g: 1, b: 0, a: 1}
+  spikeFrames: []
+  anchorOffset: {x: 0, y: 0, z: 0}
+  _hitClip: {fileID: 8300000, guid: 59c1c3dd0f0b7da49afba15c4eb30a7c, type: 3}
+  _collidedCLip: {fileID: 8300000, guid: f681e709c5216544499e0e0a44e4a685, type: 3}
 --- !u!212 &6001467911709157394
 SpriteRenderer:
   m_ObjectHideFlags: 0

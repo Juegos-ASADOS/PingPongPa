@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -21,6 +22,16 @@ public class LeaderBoardManager : MonoBehaviour
     private void Awake()
     {
         //LoadLeaderboard();
+    }
+
+    public void TryToAddScore(int score)
+    {
+        if (leaderBoard.Last() >= score)
+            return;
+
+        leaderBoard.Add(score);
+        leaderBoard.Sort();
+        leaderBoard.Reverse();
     }
 
     private void OnApplicationQuit()
