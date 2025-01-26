@@ -10,6 +10,15 @@ public class ReboundingZone : MonoBehaviour
     [SerializeField]
     private float _randomAngleMax = 30f;
 
+    AudioSource audioSrc;
+    [SerializeField]
+    AudioClip _bounceClip;
+
+    private void Awake()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
 
@@ -30,6 +39,8 @@ public class ReboundingZone : MonoBehaviour
 
             collision.GetComponent<Spike>().SetVelocity(dir);
 
+            audioSrc.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audioSrc.PlayOneShot(_bounceClip);
 
             //float rotationAngle = Mathf.Atan2(spikeTransform.position.x, spikeTransform.position.y) * Mathf.Rad2Deg;
             ////rotationAngle = 360 - rotationAngle;

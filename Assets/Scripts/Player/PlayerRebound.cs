@@ -8,10 +8,17 @@ public class PlayerRebound : MonoBehaviour
     Rigidbody2D rb;
     PlayerController playerController;
 
+    AudioSource _audioSource;
+    [SerializeField]
+    AudioClip _playersCollided;
+    [SerializeField]
+    AudioClip _playerHit;
+
     private void Start()
     {
         rb = GetComponentInParent<Rigidbody2D>();
         playerController = GetComponentInParent<PlayerController>();
+        _audioSource = GetComponentInParent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,8 +39,17 @@ public class PlayerRebound : MonoBehaviour
 
             rb.angularVelocity = 0;
             float multipl = 1f;
+
+            _audioSource.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
             if (collision.GetComponent<ShieldBehaviour>() != null)
+            {
                 multipl *= parryPlayerMulti;
+                _audioSource.PlayOneShot(_playerHit);
+            }
+            else
+            {
+                _audioSource.PlayOneShot(_playersCollided);
+            }
             rb.AddTorque(reboundForce * multipl * reboundSign / transform.localPosition.y);
             playerController.StopForRebound();
         }
