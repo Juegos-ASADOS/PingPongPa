@@ -189,6 +189,7 @@ MonoBehaviour:
   Score: 0
   gameStarted: 0
   _mainLoop: {fileID: 8300000, guid: 660f166bb8e665d4c8ed4f8be0ce1881, type: 3}
+  _intro: {fileID: 8300000, guid: 8215acf7b84cef849b27dc66e7b7dd05, type: 3}
 --- !u!114 &3458337610566279911
 MonoBehaviour:
   m_ObjectHideFlags: 0

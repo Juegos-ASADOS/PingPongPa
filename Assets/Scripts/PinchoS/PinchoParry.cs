@@ -5,6 +5,10 @@ public class PinchoParry : MonoBehaviour
     //GameObject Transform
     Transform tr;
 
+
+    [SerializeField]
+    GameObject destructionParticleSystem;       //Para crearlo cuando se destruya el pincho
+
     PlayerIDs spikeType;
     [SerializeField]
     int remainingHits;
@@ -32,6 +36,8 @@ public class PinchoParry : MonoBehaviour
     AudioClip _collidedCLip;
     [SerializeField]
     AudioClip _spawnClip;
+    [SerializeField]
+    AudioClip _destroyedClip;
 
     private void Awake()
     {
@@ -83,6 +89,8 @@ public class PinchoParry : MonoBehaviour
 
         if (remainingHits <= 0)
         {
+            GameManager.Instance.PlaySound(_destroyedClip, 0.02f);
+            Instantiate(destructionParticleSystem, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -104,10 +112,11 @@ public class PinchoParry : MonoBehaviour
         {
             remainingHits--;
 
-            if (remainingHits > 0)
+            if (remainingHits > 0)  //Sigue vivo 
                 _spriteRenderer.sprite = spikeFrames[remainingHits - 1];
-            else
+            else   //Se termina de romper
                 _spriteRenderer.sprite = spikeFrames[0];
+
 
             switch (p)
             {

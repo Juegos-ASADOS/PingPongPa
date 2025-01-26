@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Timeline;
 
 //Script encargado de la zona de spawn de los pinchos, el tiempo de spawn y la posición
 public class TinyBubbleSpawner : MonoBehaviour
