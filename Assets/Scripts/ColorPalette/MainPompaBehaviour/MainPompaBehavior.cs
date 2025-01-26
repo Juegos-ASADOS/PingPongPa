@@ -259,10 +259,6 @@ public class MainPompaBehavior : MonoBehaviour
             audio.pitch = 1f;
             audio.PlayOneShot(lowHealth);
         }
-        else if (actualLevel <= 0)
-        {
-            playBubbleExplosion();
-        }
     }
 
     void activateInvulnerability()
@@ -282,7 +278,8 @@ public class MainPompaBehavior : MonoBehaviour
 
     void playBounceAnimation()
     {
-        animator.SetTrigger("BubbleBounce");
+        if(animator != null)
+            animator.SetTrigger("BubbleBounce");
     }
 
     void playBubbleExplosion()

@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        animator.SetFloat("vel", Mathf.Abs(rb.angularVelocity));
+        if(animator.gameObject.activeSelf)
+            animator.SetFloat("vel", Mathf.Abs(rb.angularVelocity));
         if (rb.angularVelocity > 0) spriteRenderer.flipX = true;
         else spriteRenderer.flipX = false;
     }
