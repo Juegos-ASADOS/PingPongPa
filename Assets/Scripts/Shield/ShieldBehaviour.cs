@@ -34,7 +34,7 @@ public class ShieldBehaviour : MonoBehaviour
             other.GetComponent<PinchoParry>().hit(playerId);
 
         }
-        else if ( other.gameObject.layer == 8)
+        else if (other.gameObject.layer == 8) 
         {
             Vector2 dir = other.transform.position - transform.position;    //Calculo del vector de exclusion
             other.GetComponent<TinyBubble>().SetVelocity(dir.normalized * forceReturn);
