@@ -14,23 +14,35 @@ public class PinchoSpawner : MonoBehaviour
     private GameObject spikePrefab;
     [SerializeField]
     private float angleBetweenSpikes = 5.0f;
-
+    Animation anim;
     //Variables privadas
     private float timeSincelastSpawn = 0.0f;
     private float lastAngle = 0.0f;
 
+    private void Start()
+    {
+        anim = GetComponent<Animation>();
+    }
 
     private void Update()
     {
+        if (!GameManager.Instance.gameStarted)
+            return;
+
         if (timeSincelastSpawn < timeBeetweenSpikes)
             timeSincelastSpawn += Time.deltaTime;
         else
         {
+            
             //Posicion spawn
             int angle = Random.Range(0, 361);
             while (Mathf.Abs(angle - lastAngle) < angleBetweenSpikes) angle = Random.Range(0, 361);  //Para respetar la diferencia entre pinchos
 
             Vector2 spawnPosition = new Vector2(spawningRadious * Mathf.Cos(angle), spawningRadious * Mathf.Sin(angle));    //Formula matemática
+
+            //Animación de antes de que aparezca el pincho
+            anim.Play();
+            //Esperar a que acabe la animación y que la animación llame a un método que sea todo esto
 
             GameObject newSpike = Instantiate(spikePrefab, spawnPosition, Quaternion.identity);
             //Calculo del vector hacia el centro.
