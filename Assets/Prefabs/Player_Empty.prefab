@@ -345,8 +345,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  reboundTime: 1
+  reboundTime: 0.6
   animator: {fileID: 5957835550154264444}
+  spriteRenderer: {fileID: 4417005661821824773}
   controllers:
   - {fileID: 9100000, guid: a6ab2a73295c2534999c840df94b1fcb, type: 2}
   - {fileID: 9100000, guid: c4dbbb99b482b264f834e093ba334acc, type: 2}
@@ -594,7 +595,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5a7813ac6f548a8b5ef73bce5084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reboundForce: 50
+  reboundForce: 30
+  parryPlayerMulti: 6.5
 --- !u!61 &1409446936363775594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -629,7 +631,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0058858246, y: 0.022987962}
+  m_Offset: {x: 0.057474315, y: 0.5388729}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.18}
@@ -639,7 +641,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.68216705, y: 0.62330925}
+  m_Size: {x: 0.5789901, y: 1.1233207}
   m_EdgeRadius: 0
 --- !u!95 &5957835550154264444
 Animator:

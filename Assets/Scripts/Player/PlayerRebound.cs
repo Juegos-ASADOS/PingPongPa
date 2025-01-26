@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerRebound : MonoBehaviour
 {
     [SerializeField]
-    float reboundForce;
+    float reboundForce, parryPlayerMulti;
 
     Rigidbody2D rb;
     PlayerController playerController;
@@ -31,7 +31,10 @@ public class PlayerRebound : MonoBehaviour
                 reboundSign *= -1;
 
             rb.angularVelocity = 0;
-            rb.AddTorque(reboundForce * reboundSign / transform.localPosition.y);
+            float multipl = 1f;
+            if (collision.GetComponent<ShieldBehaviour>() != null)
+                multipl *= parryPlayerMulti;
+            rb.AddTorque(reboundForce * multipl * reboundSign / transform.localPosition.y);
             playerController.StopForRebound();
         }
     }
