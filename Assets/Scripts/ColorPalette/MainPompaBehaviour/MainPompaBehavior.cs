@@ -41,6 +41,7 @@ public class MainPompaBehavior : MonoBehaviour
     private Material bubbleMaterial;
 
     public UnityEvent<float> OnSizeChange;
+    public UnityEvent OnBubbleDestroy;
 
     //Color de la burbuja
     float actualLevelColor;
@@ -255,6 +256,10 @@ public class MainPompaBehavior : MonoBehaviour
             audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
             audio.PlayOneShot(lowHealth);
         }
+        else if(actualLevel <= 0)
+        {
+            playBubbleExplosion();
+        }
     }
 
     void activateInvulnerability()
@@ -290,7 +295,7 @@ public class MainPompaBehavior : MonoBehaviour
         //Tiempo de vida de las particulas
         vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
         bubbleExplosion = true;
-
+        OnBubbleDestroy.Invoke();
     }
 
     public void PlayerSpawned(PlayerInput player)
@@ -304,7 +309,10 @@ public class MainPompaBehavior : MonoBehaviour
         Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
         playerTr.SetLocalPositionAndRotation(playerPos, playerTr.localRotation);
 
-        OnSizeChange.AddListener(player.GetComponent<PlayerController>().BubbleSizeChanged);
+        PlayerController pc = player.GetComponent<PlayerController>(); 
+        OnSizeChange.AddListener(pc.BubbleSizeChanged);
+        OnBubbleDestroy.AddListener(pc.BubbleDestroyed);
+        GameManager.Instance.PlayerSpawned(player);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

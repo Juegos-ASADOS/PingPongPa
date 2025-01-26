@@ -69,11 +69,12 @@ Material:
     - _NoiseToTexture: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 0
+    - _Scale: -170.2
     - _ScaleUV: 2
     - _Speed: 0.15
     m_Colors:
     - _BackgroundColor: {r: 0.1625578, g: 0.09487359, b: 0.24528301, a: 1}
     - _DotColor: {r: 0.32941177, g: 0.2509804, b: 0.48235294, a: 1}
+    - _PannerDir: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

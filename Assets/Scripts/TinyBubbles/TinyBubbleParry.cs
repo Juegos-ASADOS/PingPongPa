@@ -5,6 +5,8 @@ public class TinyBubbleParry : MonoBehaviour
     [SerializeField]
     int remainingHits;
     [SerializeField]
+    Color[] colors = new Color[2];
+    Color spritecolor;
     float[] colorHue = new float[2];
     Material bubbleMaterial;
     bool parried;
@@ -16,6 +18,10 @@ public class TinyBubbleParry : MonoBehaviour
 
     [SerializeField]
     AudioClip _spikeDestroyed;
+    [SerializeField]
+    AudioClip _bubbleSpawned;
+    [SerializeField]
+    AudioClip _bubbleHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +31,8 @@ public class TinyBubbleParry : MonoBehaviour
         //Bubble Explosion Params
         bubbleExplosion = false;
         vfxExplosionLifeTime = 10.0f;
+
+        GameManager.Instance.PlaySound(_bubbleSpawned, 0.04f);
     }
 
     // Update is called once per frame
@@ -37,6 +45,10 @@ public class TinyBubbleParry : MonoBehaviour
     {
         parried = true;
         bubbleMaterial.SetFloat("_Level", colorHue[1]);
+        spritecolor = colors[1];
+        gameObject.GetComponent<SpriteRenderer>().color = spritecolor;
+
+        GameManager.Instance.PlaySound(_bubbleHit, 0.04f);
     }
     void checkBubbleExplosion(float deltaTime)
     {
@@ -73,6 +85,7 @@ public class TinyBubbleParry : MonoBehaviour
             var audio = GameManager.Instance.GetComponent<AudioSource>();
             audio.pitch = UnityEngine.Random.Range(0.98f, 1.02f);
             audio.PlayOneShot(_spikeDestroyed);
+            GameManager.Instance.PlaySound(_spikeDestroyed, 0.02f);
         }
     }
 
