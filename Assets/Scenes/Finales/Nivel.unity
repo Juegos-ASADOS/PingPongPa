@@ -1144,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7913694061281913149, guid: 0575d594e93448348909fb1f1a7f690b, type: 3}
+      propertyPath: m_Radius
+      value: 4.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8425673534819915902, guid: 0575d594e93448348909fb1f1a7f690b, type: 3}
       propertyPath: m_Name
       value: ReboundingZone
