@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 8166275023330524819}
   - component: {fileID: 4518639356268104061}
   - component: {fileID: 6150973428463195601}
-  - component: {fileID: 4471274295146143079}
   m_Layer: 7
   m_Name: MainBubble
   m_TagString: Untagged
@@ -303,19 +302,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &4471274295146143079
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7106635920483376931}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
