@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(CallbackContext context)
     {
-        if (onRebound)
+        if (onRebound || !GameManager.Instance.gameStarted)
             return;
 
         Vector2 moveValue = context.ReadValue<Vector2>();
