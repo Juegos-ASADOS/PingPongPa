@@ -58,6 +58,10 @@ public class MainPompaBehavior : MonoBehaviour
     float vfxExplosionLifeTime;
     bool bubbleExplosion;
 
+    [SerializeField]
+    GameObject[] playerSpawns;
+    private int indxSpawn = 0;
+
 #if DEBUG
     bool debugDeath = true;
 #endif 
@@ -300,6 +304,8 @@ public class MainPompaBehavior : MonoBehaviour
 
     public void PlayerSpawned(PlayerInput player)
     {
+        playerSpawns[indxSpawn].GetComponent<Animator>().SetTrigger("game");
+        playerSpawns[indxSpawn].GetComponent<SpawnPlayer>().player = player.gameObject;
         Transform playerTr = player.transform.GetChild(0);
 
         Vector2 playerPos = new(playerTr.position.x, tr.localScale.y / 2f);
