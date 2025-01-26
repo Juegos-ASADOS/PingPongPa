@@ -16,7 +16,7 @@ public class PlayerRebound : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerRebound>() != null)
+        if (collision.GetComponent<PlayerRebound>() != null || collision.GetComponent<ShieldBehaviour>() != null)
         {
             float thisAngle = transform.parent.rotation.eulerAngles.z;
             float otherAngle = collision.transform.parent.rotation.eulerAngles.z;
