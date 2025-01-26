@@ -22,12 +22,20 @@ public class PinchoParry : MonoBehaviour
     Transform trailTransform;
     Transform[] trailsAnchors;
     [SerializeField]
-    private Vector3 anchorOffset; 
+    private Vector3 anchorOffset;
+
+    //Sounds
+    AudioSource _audioSource;
+    [SerializeField]
+    AudioClip _hitClip;
+    [SerializeField]
+    AudioClip _collidedCLip;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         tr = transform;
-        for(int i = 0; i < remainingHits; i++)
+        for (int i = 0; i < remainingHits; i++)
         {
             Vector3 anchorPosition = anchorOffset * i;
             GameObject go = new GameObject();
@@ -53,7 +61,7 @@ public class PinchoParry : MonoBehaviour
                 spikeType = PlayerIDs.PlayerA;
                 break;
             case 1:
-                spikeType = PlayerIDs.PlayerB;                
+                spikeType = PlayerIDs.PlayerB;
                 break;
         }
         colorCntrl.ChangeColorPincho((int)spikeType - 1);
@@ -71,7 +79,7 @@ public class PinchoParry : MonoBehaviour
 
     void updateTrailAnchor()
     {
-        string anchorId = "AnchorTrail" + (remainingHits-1);
+        string anchorId = "AnchorTrail" + (remainingHits - 1);
         trailTransform.localPosition = tr.Find(anchorId).localPosition;
     }
 
@@ -92,11 +100,16 @@ public class PinchoParry : MonoBehaviour
             }
         }
         colorCntrl.ChangeColorPincho((int)spikeType - 1);
+
+        _audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        _audioSource.PlayOneShot(_hitClip);
     }
 
     public void MainBubbleCollided()
     {
         //Playear la animaci�n de muerte explotar
+        _audioSource.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        _audioSource.PlayOneShot(_collidedCLip);
         Destroy(gameObject);
     }
 }

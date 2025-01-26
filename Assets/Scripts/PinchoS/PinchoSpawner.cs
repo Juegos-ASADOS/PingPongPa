@@ -23,8 +23,17 @@ public class PinchoSpawner : MonoBehaviour
     private float timeSincelastSpawn = 0.0f;
     private float lastAngle = 0.0f;
 
+    AudioSource _audioSource;
+    [SerializeField]
+    AudioClip _spawnClip;
+
     private void Start()
     {
+    }
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -46,6 +55,11 @@ public class PinchoSpawner : MonoBehaviour
             spawnObject.GetComponentInChildren<SpikeAnimation>().Init(gameObject);
             timeSincelastSpawn = 0;
             lastAngle = angle;
+
+
+            _audioSource.pitch = UnityEngine.Random.Range(0.98f, 1.02f);
+            _audioSource.PlayOneShot(_spawnClip);
+
             ////Animación de antes de que aparezca el pincho
             //Debug.Log("Playing animation");
             //anim.Play();
