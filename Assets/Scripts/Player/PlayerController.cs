@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum PlayerIDs { PlayerA = 1, PlayerB, Null = -1 }
@@ -105,5 +106,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 newPos = new(playerRealTr.localPosition.x, newScale / 2f);
         playerRealTr.localPosition = newPos;
+    }
+
+    public void BubbleDestroyed()
+    {
+        animator.SetTrigger("Muelto");
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.PlayerDestroyed();
     }
 }

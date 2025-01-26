@@ -54,4 +54,10 @@ public class PlayerRebound : MonoBehaviour
             playerController.StopForRebound();
         }
     }
+
+    // Esto está aqui porque el animator lo tiene el hijo sorry
+    public void DeathEnd()
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }
