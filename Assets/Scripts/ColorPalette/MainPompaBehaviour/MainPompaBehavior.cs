@@ -62,6 +62,10 @@ public class MainPompaBehavior : MonoBehaviour
     AudioClip maxHealth;
     [SerializeField]
     AudioClip lowHealth;
+    [SerializeField]
+    AudioClip lostHealth;
+    [SerializeField]
+    AudioClip gainHealth;
 
 #if DEBUG
     bool debugDeath = true;
@@ -330,11 +334,18 @@ public class MainPompaBehavior : MonoBehaviour
         {
             decreaseToLowerLevel();
             other.GetComponent<PinchoParry>().MainBubbleCollided();
+
+            //Playear la animacion de muerte explotar
+            audio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audio.PlayOneShot(lostHealth);
         }
         else if (other.gameObject.layer == 8)
         {
             Destroy(other.gameObject);
             increaseBubbleOnHit(1);
+            //Playear la animacion de muerte explotar
+            audio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            audio.PlayOneShot(gainHealth);
         }
     }
 }

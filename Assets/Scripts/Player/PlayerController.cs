@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform playerRealTr;
 
+    AudioSource _audioSource;
+
+    [SerializeField]
+    AudioClip _playerFinishesSpawned;
+
     PlayerIDs playerId = PlayerIDs.Null;
 
     bool onRebound = false;
@@ -36,6 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         reboundTimer = reboundTime;
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void Init(int id)

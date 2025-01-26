@@ -7,6 +7,9 @@ public class TinyBubbleParry : MonoBehaviour
     [SerializeField]
     Color[] colors = new Color[2];
     Color spritecolor;
+
+    [SerializeField]
+    AudioClip _spikeDestroyed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,10 +34,13 @@ public class TinyBubbleParry : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 6 && spritecolor == colors[1])
+        if (collision.gameObject.layer == 6 && spritecolor == colors[1])
         {
             collision.GetComponent<PinchoParry>().MainBubbleCollided();
             Destroy(gameObject);
+            var audio = GameManager.Instance.GetComponent<AudioSource>();
+            audio.pitch = UnityEngine.Random.Range(0.98f, 1.02f);
+            audio.PlayOneShot(_spikeDestroyed);
         }
     }
 
