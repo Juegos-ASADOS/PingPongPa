@@ -7,8 +7,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
-
-
+    AudioSource audio;
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -56,6 +55,7 @@ public class MainPompaBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         tr = transform;
         spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
@@ -194,6 +194,7 @@ public class MainPompaBehavior : MonoBehaviour
     void increaseBubbleOnHit(float percentageIncreased)
     {
         if (actualLevel >= maxLevel)
+            audio.Play();
             return;
 
         float sum = radiusLevelsInterval * percentageIncreased;

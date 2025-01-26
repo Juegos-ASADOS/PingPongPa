@@ -16,7 +16,6 @@ public class Spike : MonoBehaviour
         rb.AddForce(vel);
 
         var angle = Vector2.SignedAngle(-transform.up, vel.normalized);
-        Debug.Log(angle);
 
         var toRotate = Quaternion.AngleAxis(angle, Vector3.forward);
 

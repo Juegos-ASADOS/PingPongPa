@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8166275023330524819, guid: 680978b1064cfe5459e494dc305a8b87, type: 3}
+      propertyPath: maxBuble
+      value: 
+      objectReference: {fileID: 8300000, guid: 33f4bb818dd13e54580b18bda32d15cc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
