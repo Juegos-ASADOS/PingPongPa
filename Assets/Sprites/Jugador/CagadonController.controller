@@ -75,7 +75,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0d815c5c383cffa4a90b9daafa5e8d97, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0329cefbc6a3ea140b2ec791b7b313e4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -102,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f1dabf30977e06342b2a5162e640137b, type: 2}
+  m_Motion: {fileID: 7400000, guid: c618e53ae23c7e14d8f4b5a8cfba11cf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -237,6 +237,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: NoPegao
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: game
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -392,7 +398,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ee0fab7d2acd22c4c842f23ec402f2ce, type: 2}
+  m_Motion: {fileID: 7400000, guid: 891378385dc455c4393e42935282c8ff, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
