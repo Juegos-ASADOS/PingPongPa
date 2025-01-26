@@ -359,6 +359,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: c7f61fc6e92257a4fa2487aa6892e5f8, type: 2}
   - {fileID: 9100000, guid: b33db7d57987b3146a50749ca9db1c00, type: 2}
   playerRealTr: {fileID: 1107333475329581561}
+  _playerFinishesSpawned: {fileID: 8300000, guid: db714a210bf396742855c6b8c536adc9, type: 3}
 --- !u!96 &7166137574161767802
 TrailRenderer:
   serializedVersion: 3
@@ -682,6 +683,7 @@ GameObject:
   - component: {fileID: 1554646540297822491}
   - component: {fileID: 1409446936363775594}
   - component: {fileID: 5957835550154264444}
+  - component: {fileID: 1107917686237041068}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -789,8 +791,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reboundForce: 30
   parryPlayerMulti: 6.5
-  _playersCollided: {fileID: 0}
-  _playerHit: {fileID: 0}
+  _playersCollided: {fileID: 8300000, guid: 9878cdf0c3af36f4b892069d089ef1a1, type: 3}
+  _playerHit: {fileID: 8300000, guid: 5d4de9d5436f07a4597d1f781085350b, type: 3}
 --- !u!61 &1409446936363775594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -859,6 +861,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1107917686237041068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609933323433901765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5e972e5ad38aa48971fa88e5348d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePops:
+  - {fileID: 8300000, guid: 3a1656fded2040b4d8b90679f12003ff, type: 3}
+  - {fileID: 8300000, guid: 754ec84313028ef40bb0cbe8974b0b77, type: 3}
+  - {fileID: 8300000, guid: 0039df96bf2b1584e8f0eae37514693f, type: 3}
+  - {fileID: 8300000, guid: ff4313aa3f01b87469a155c8cf331241, type: 3}
+  - {fileID: 8300000, guid: cff97f321537cd5459ded70546f2e01f, type: 3}
+  - {fileID: 8300000, guid: d272065e13e55554aa5af734bf2247cc, type: 3}
+  strongPop: {fileID: 8300000, guid: db714a210bf396742855c6b8c536adc9, type: 3}
 --- !u!1 &8363327072059026900
 GameObject:
   m_ObjectHideFlags: 0

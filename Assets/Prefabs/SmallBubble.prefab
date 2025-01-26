@@ -92,6 +92,7 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0.87176263, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  _spikeDestroyed: {fileID: 8300000, guid: effe281d3662a8748952182d0095b4ae, type: 3}
 --- !u!212 &6001467911709157394
 SpriteRenderer:
   m_ObjectHideFlags: 0
