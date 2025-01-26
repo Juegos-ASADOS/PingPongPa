@@ -159,13 +159,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusLevelsInterval: 1
   growSpeedSeconds: 5
-  animationGrothSpeed: 2
   maxLevel: 5
-  scaleObjetive: 1
+  initScale: 2
   initialLevel: 2
   spriteRenderer: {fileID: 0}
   tr: {fileID: 0}
   OnSizeChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBubbleDestroy:
     m_PersistentCalls:
       m_Calls: []
   bubbleExplosionVFX: {fileID: 6378974188790151929, guid: 1bcf8f57c0fc92f459eefe1fa8c633e5, type: 3}
@@ -176,6 +178,8 @@ MonoBehaviour:
   lowHealth: {fileID: 8300000, guid: 6d6cd7b489a8ae945b13173887856d04, type: 3}
   lostHealth: {fileID: 8300000, guid: f681e709c5216544499e0e0a44e4a685, type: 3}
   gainHealth: {fileID: 8300000, guid: abe840216c397ef4eae0774d6b14b6e6, type: 3}
+  lose: {fileID: 8300000, guid: 3a023de156b2d874d951d90c6413c3a0, type: 3}
+  gameoverjingle: {fileID: 8300000, guid: 932b82b0e17f24740842171704c3d6c0, type: 3}
 --- !u!58 &4518639356268104061
 CircleCollider2D:
   m_ObjectHideFlags: 0
