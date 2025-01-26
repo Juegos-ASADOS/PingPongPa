@@ -16,7 +16,7 @@ public class ColorChangePincho : MonoBehaviour
     {
 
         pSystem = this.GetComponentInChildren<ParticleSystem>();
-        trailRend = this.GetComponent<TrailRenderer>();
+        trailRend = this.GetComponentInChildren<TrailRenderer>();
         _renderer = GetComponentsInChildren<SpriteRenderer>();
 
 
