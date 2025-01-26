@@ -22,6 +22,9 @@ public class PinchoSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.gameStarted)
+            return;
+
         if (timeSincelastSpawn < timeBeetweenSpikes)
             timeSincelastSpawn += Time.deltaTime;
         else

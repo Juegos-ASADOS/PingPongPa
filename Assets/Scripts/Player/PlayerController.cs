@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     float reboundTimer;
 
     Rigidbody2D rb;
+    [SerializeField]
+    Animator animator;
+
+    [SerializeField]
+    RuntimeAnimatorController[] controllers;
 
     [SerializeField]
     Transform playerRealTr;
@@ -31,16 +36,9 @@ public class PlayerController : MonoBehaviour
 
     public void Init(int id)
     {
-        playerId = (PlayerIDs)id;
-
-        // TODO: cambiar por cambiar el sprite
-        if (playerId == PlayerIDs.PlayerA)
-            GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 206);
-        else if (playerId == PlayerIDs.PlayerB)
-        {
-            GetComponentInChildren<SpriteRenderer>().color = new Color(0, 255, 0);
-            transform.localEulerAngles = new Vector3(0, 0, 180);
-        }
+        playerId = (PlayerIDs)id;        
+        animator.runtimeAnimatorController = controllers[id - 1];
+        transform.localEulerAngles = new Vector3(0, 0, 180 * (id - 1));
 
         GetComponentInChildren<ShieldBehaviour>(true).Init(playerId);
     }
@@ -59,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(CallbackContext context)
     {
-        if (onRebound)
+        if (onRebound || !GameManager.Instance.gameStarted)
             return;
 
         Vector2 moveValue = context.ReadValue<Vector2>();

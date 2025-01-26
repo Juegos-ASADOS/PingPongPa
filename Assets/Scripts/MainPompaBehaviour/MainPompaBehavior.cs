@@ -7,8 +7,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
-
-
+    AudioSource audio;
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -66,6 +65,7 @@ public class MainPompaBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         tr = transform;
         spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
@@ -108,6 +108,8 @@ public class MainPompaBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.Instance.gameStarted)
+            return;
 
         float delta = Time.fixedDeltaTime;
 
@@ -163,7 +165,7 @@ public class MainPompaBehavior : MonoBehaviour
         }
 
         //Color Lerp
-        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, scaleObjetive-actualLevel));
+        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, scaleObjetive - actualLevel));
     }
 
 
@@ -221,6 +223,7 @@ public class MainPompaBehavior : MonoBehaviour
     void increaseBubbleOnHit(float percentageIncreased)
     {
         if (actualLevel >= maxLevel)
+            audio.Play();
             return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
@@ -312,7 +315,7 @@ public class MainPompaBehavior : MonoBehaviour
             decreaseToLowerLevel();
             other.GetComponent<PinchoParry>().MainBubbleCollided();
         }
-        else if(other.gameObject.layer == 8)
+        else if (other.gameObject.layer == 8)
         {
             Destroy(other.gameObject);
             increaseBubbleOnHit(1);

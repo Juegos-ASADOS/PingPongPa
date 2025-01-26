@@ -20,9 +20,11 @@ public class TinyBubbleSpawner : MonoBehaviour
     private float timeSincelastSpawn = 0.0f;
     private float lastAngle = 0.0f;
 
-
     private void Update()
     {
+        if (!GameManager.Instance.gameStarted)
+            return;
+
         if (timeSincelastSpawn < timeBeetweenTinyBubbles)
             timeSincelastSpawn += Time.deltaTime;
         else
