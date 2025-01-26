@@ -60,7 +60,7 @@ Material:
     - _NoiseToTexture: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScaleUV: 1.05
+    - _ScaleUV: 1.15
     - _Speed: 0.2
     m_Colors: []
   m_BuildTextureStacks: []

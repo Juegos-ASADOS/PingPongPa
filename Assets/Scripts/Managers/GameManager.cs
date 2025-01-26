@@ -98,6 +98,9 @@ public class GameManager : MonoBehaviour
             if (resetTimer <= 0)
             {
                 gameFinished = false;
+                _boardManager.TryToAddScore(Score);
+                Score = 0;
+                UpdateCanvas();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -131,6 +134,7 @@ public class GameManager : MonoBehaviour
             gameFinished = true;
             gameStarted = false;
             resetTimer = timeToReset;
+            Destroy(PlayerInputManager.instance.gameObject);
         }
     }
 
