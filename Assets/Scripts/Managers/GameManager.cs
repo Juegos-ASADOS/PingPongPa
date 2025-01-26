@@ -92,6 +92,9 @@ public class GameManager : MonoBehaviour
             if (resetTimer <= 0)
             {
                 gameFinished = false;
+                _boardManager.TryToAddScore(Score);
+                Score = 0;
+                UpdateCanvas();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
