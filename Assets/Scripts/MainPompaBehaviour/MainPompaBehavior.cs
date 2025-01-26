@@ -91,6 +91,8 @@ public class MainPompaBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.Instance.gameStarted)
+            return;
 
         float delta = Time.fixedDeltaTime;
 
@@ -146,7 +148,7 @@ public class MainPompaBehavior : MonoBehaviour
         }
 
         //Color Lerp
-        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, scaleObjetive-actualLevel));
+        bubbleMaterial.SetFloat("_Level", Mathf.Lerp(actualLevelColor, nextLevelColor, scaleObjetive - actualLevel));
     }
 
 
@@ -277,7 +279,7 @@ public class MainPompaBehavior : MonoBehaviour
             decreaseToLowerLevel();
             other.GetComponent<PinchoParry>().MainBubbleCollided();
         }
-        else if(other.gameObject.layer == 8)
+        else if (other.gameObject.layer == 8)
         {
             Destroy(other.gameObject);
             increaseBubbleOnHit(1);

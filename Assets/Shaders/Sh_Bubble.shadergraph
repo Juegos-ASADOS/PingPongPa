@@ -1737,7 +1737,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 10.0,
+    "m_Value": 2.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -1808,8 +1808,8 @@
     "m_ObjectId": "07cb1e9f842b4a9889fc0a30c151e741",
     "m_Title": "Side",
     "m_Position": {
-        "x": -3323.0,
-        "y": 2329.0
+        "x": -3322.99951171875,
+        "y": 2328.999755859375
     }
 }
 
@@ -2147,8 +2147,8 @@
     "m_ObjectId": "1236709d964f47119053fb53373af0e9",
     "m_Title": "Fresnel",
     "m_Position": {
-        "x": -2602.0,
-        "y": 188.0
+        "x": -2601.999755859375,
+        "y": 187.99998474121095
     }
 }
 
@@ -3032,7 +3032,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.15000000596046449,
+    "m_Value": 0.20000000298023225,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -4014,8 +4014,8 @@
     "m_ObjectId": "507013d50a7c485080a3f3ad47525753",
     "m_Title": "Shine",
     "m_Position": {
-        "x": -3759.0,
-        "y": -1121.0
+        "x": -3758.99951171875,
+        "y": -1120.9998779296875
     }
 }
 
@@ -4071,8 +4071,8 @@
     "m_ObjectId": "52248e2a7611440a924c83343cd0ded8",
     "m_Title": "InnerShine",
     "m_Position": {
-        "x": -2751.0,
-        "y": 796.0
+        "x": -2750.999755859375,
+        "y": 795.9998779296875
     }
 }
 
@@ -4445,7 +4445,7 @@
     "m_RefNameGeneratedByDisplayName": "ScaleUV",
     "m_DefaultReferenceName": "_ScaleUV",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
@@ -4453,7 +4453,7 @@
     "overrideHLSLDeclaration": true,
     "hlslDeclarationOverride": 2,
     "m_Hidden": false,
-    "m_Value": 1.5,
+    "m_Value": 1.0499999523162842,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -4915,8 +4915,8 @@
     "m_ObjectId": "7083b9cc0bc9432fa7603a2a2a02efa3",
     "m_Title": "Small Shiny",
     "m_Position": {
-        "x": -2097.0,
-        "y": -1005.0
+        "x": -2096.99951171875,
+        "y": -1005.0000610351563
     }
 }
 
@@ -5267,8 +5267,8 @@
     "m_ObjectId": "80e0da3feb044263821dd1843d994365",
     "m_Title": "Remap to 0-1",
     "m_Position": {
-        "x": -3120.0,
-        "y": 466.0
+        "x": -3119.99951171875,
+        "y": 465.99993896484377
     }
 }
 
@@ -5504,8 +5504,8 @@
     "m_ObjectId": "88134fe7d35a4b4983802fee805dc858",
     "m_Title": "Cirle Shape",
     "m_Position": {
-        "x": -4519.0,
-        "y": 1185.0
+        "x": -4518.99951171875,
+        "y": 1184.999755859375
     }
 }
 
@@ -5760,7 +5760,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": -0.05000000074505806,
+    "m_Value": -0.05999999865889549,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -5931,8 +5931,8 @@
     "m_ObjectId": "9d7381478b1d4e968226be6660f88093",
     "m_Title": "Undo UV transformation from noise",
     "m_Position": {
-        "x": -4325.0,
-        "y": -193.0
+        "x": -4324.99951171875,
+        "y": -192.99996948242188
     }
 }
 
@@ -6944,8 +6944,8 @@
     "m_ObjectId": "af4bf10a127547db8b9224c90af66640",
     "m_Title": "Noise Distorsion",
     "m_Position": {
-        "x": -6960.0,
-        "y": 410.0
+        "x": -6959.9990234375,
+        "y": 409.9999694824219
     }
 }
 
@@ -7096,8 +7096,8 @@
     "m_ObjectId": "b5cc136c900d485daea89724eb167c33",
     "m_Title": "Fresnel Noise",
     "m_Position": {
-        "x": -2259.0,
-        "y": 2156.0
+        "x": -2258.999755859375,
+        "y": 2155.999755859375
     }
 }
 
@@ -8302,8 +8302,8 @@
     "m_ObjectId": "cee52d9d9f854d7099c1a5562a0f6818",
     "m_Title": "Coordinates",
     "m_Position": {
-        "x": -5980.0,
-        "y": 1118.0
+        "x": -5979.99951171875,
+        "y": 1117.9998779296875
     }
 }
 
@@ -9687,10 +9687,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -4768.1669921875,
-            "y": 585.006103515625,
+            "x": -4931.0,
+            "y": 661.0,
             "width": 126.0,
-            "height": 77.0
+            "height": 77.00006103515625
         }
     },
     "m_Slots": [

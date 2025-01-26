@@ -34,7 +34,6 @@ public class ColorChangePincho : MonoBehaviour
             Material mat = trailRend.material;
             if (mat && mat.HasProperty("_Color"))
             {
-                Debug.Log("Mat property ENCONTRADO");
                 mat.SetColor("_Color", colorPincho);
             }
         }
@@ -59,7 +58,6 @@ public class ColorChangePincho : MonoBehaviour
             Material mat = render.material;
             if (mat && mat.HasProperty("_Color"))
             {
-                Debug.Log("Mat property ENCONTRADO");
                 mat.SetColor("_Color", colorPincho);
             }
         }
