@@ -7,8 +7,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
-
-
+    AudioSource audio;
     //The ammount of scale that correspond to each level
     public float radiusLevelsInterval = 1.0f;
     //How many seconds it takes for the bubble to grow to the next level.
@@ -48,14 +47,25 @@ public class MainPompaBehavior : MonoBehaviour
 
     public UnityEvent<float> OnSizeChange;
 
+    //Color de la burbuja
     float actualLevelColor;
     float nextLevelColor;
 
     enum LevelColor { LEVEL1 = 135, LEVEL2 = 165, LEVEL3 = 230, LEVEL4 = 340, LEVEL5 = 370 }
 
+    //Bubble Explosion
+    public GameObject bubbleExplosionVFX;
+    float vfxExplosionLifeTime;
+    bool bubbleExplosion;
+
+#if DEBUG
+    bool debugDeath = true;
+#endif 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         tr = transform;
         spriteRenderer = tr.GetComponentInChildren<SpriteRenderer>();
         scaleObjetive = actualLevel = initialLevel;
@@ -63,6 +73,8 @@ public class MainPompaBehavior : MonoBehaviour
         bubbleMaterial = tr.GetComponentInChildren<SpriteRenderer>().material;
         animator = tr.GetComponentInChildren<Animator>();
         actualLevelColor = (float)LevelColor.LEVEL1;
+        bubbleExplosion = false;
+        vfxExplosionLifeTime = 10.0f;
     }
 
 
@@ -83,7 +95,12 @@ public class MainPompaBehavior : MonoBehaviour
         {
             playBounceAnimation();
         }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            playBubbleExplosion();
+        }
 #endif
+        checkBubbleExplosion(Time.deltaTime);
         changeColorMaterial();
     }
 
@@ -189,11 +206,24 @@ public class MainPompaBehavior : MonoBehaviour
         }
     }
 
+    void checkBubbleExplosion(float deltaTime)
+    {
+        //Countdown for the mainObject to destroy
+        if (bubbleExplosion)
+        {
+            vfxExplosionLifeTime -= deltaTime;
+
+            if (vfxExplosionLifeTime <= 0)
+                Destroy(this.gameObject);
+        }
+    }
+
 
     //increae the bubbble level by a percentage given by a proyectile
     void increaseBubbleOnHit(float percentageIncreased)
     {
         if (actualLevel >= maxLevel)
+            audio.Play();
             return;
 
         float sum = radiusLevelsInterval * percentageIncreased;
@@ -215,16 +245,6 @@ public class MainPompaBehavior : MonoBehaviour
         tr.localScale = scaleFactor * scaleObjetive;
 
         //actualize the bubble desired scale
-
-
-        ////Uncomment this code to make the bubble change size dinamically
-        ////Increase bubble radius to reach next level and further increase the next level what remains of the percentage increase
-        //levelPercentageRadius += percentageIncreased;
-        //if (levelPercentageRadius >= 100.0f)
-        //{
-        //    levelPercentageRadius -= 100.0f;
-        //    actualLevel++;
-        //}
     }
 
     void decreaseToLowerLevel()
@@ -260,6 +280,22 @@ public class MainPompaBehavior : MonoBehaviour
     void playBounceAnimation()
     {
         animator.SetTrigger("BubbleBounce");
+    }
+
+    void playBubbleExplosion()
+    {
+        Transform child = tr.GetChild(0);
+        if (child.GetComponent<SpriteRenderer>())
+            Destroy(child.gameObject);
+
+        GameObject vfxExplosion = Instantiate(bubbleExplosionVFX, tr);
+        vfxExplosion.transform.SetParent(tr);
+        vfxExplosion.transform.GetChild(0).localScale = tr.localScale;
+
+        //Tiempo de vida de las particulas
+        vfxExplosionLifeTime = vfxExplosion.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
+        bubbleExplosion = true;
+
     }
 
     public void PlayerSpawned(PlayerInput player)
