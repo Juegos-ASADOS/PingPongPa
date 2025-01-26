@@ -47,5 +47,6 @@ MonoBehaviour:
   timeBeetweenSpikes: 3
   spawningRadious: 5
   spikeSpeed: 50
-  spikePrefab: {fileID: 9210002571197935720, guid: e7957bcc17503ed4d968b5b330199973, type: 3}
+  spikePrefab: {fileID: 730496652223353957, guid: 18f8a299864dc04439646b45927cdbd1, type: 3}
   angleBetweenSpikes: 5
+  spawnPrefab: {fileID: 5816470717413937241, guid: 1ac0dfc64468b1c4abb5f2e2f893cf3a, type: 3}
