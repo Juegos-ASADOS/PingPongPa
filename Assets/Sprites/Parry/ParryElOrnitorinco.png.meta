@@ -547,7 +547,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ParryElOrnitorinco_0: -6848955640998814021
+      ParryElOrnitorinco_1: -2553382392819546816
+      ParryElOrnitorinco_10: 1377513616735257624
+      ParryElOrnitorinco_11: 2245253302548147364
+      ParryElOrnitorinco_12: 6758875834974628899
+      ParryElOrnitorinco_13: -4138979301985959639
+      ParryElOrnitorinco_14: -1431319567415569965
+      ParryElOrnitorinco_15: -675747361662156906
+      ParryElOrnitorinco_16: -4853518687425591232
+      ParryElOrnitorinco_2: 4678289811589976958
+      ParryElOrnitorinco_3: -2190081513981075974
+      ParryElOrnitorinco_4: 5553273050285051621
+      ParryElOrnitorinco_5: -1872362870555571708
+      ParryElOrnitorinco_6: 7930547190638503373
+      ParryElOrnitorinco_7: 2615279190585658555
+      ParryElOrnitorinco_8: -4666475747162263859
+      ParryElOrnitorinco_9: 4388331145800835326
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
