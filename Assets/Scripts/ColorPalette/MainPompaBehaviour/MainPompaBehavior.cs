@@ -1,9 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using static UnityEngine.InputSystem.InputAction;
 
 public class MainPompaBehavior : MonoBehaviour
 {
@@ -58,9 +55,12 @@ public class MainPompaBehavior : MonoBehaviour
     float vfxExplosionLifeTime;
     bool bubbleExplosion;
 
-    [SerializeField]
     GameObject[] playerSpawns;
     private int indxSpawn = 0;
+    [SerializeField]
+    AudioClip maxHealth;
+    [SerializeField]
+    AudioClip lowHealth;
 
 #if DEBUG
     bool debugDeath = true;
@@ -99,7 +99,7 @@ public class MainPompaBehavior : MonoBehaviour
         {
             playBounceAnimation();
         }
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             playBubbleExplosion();
         }
@@ -238,7 +238,8 @@ public class MainPompaBehavior : MonoBehaviour
         if (actualLevel > maxLevel)
         {
             actualLevel = maxLevel;
-            audio.Play();
+            audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
+            audio.PlayOneShot(maxHealth);
             scaleObjetive = actualLevel * radiusLevelsInterval;
         }
         else
@@ -264,6 +265,12 @@ public class MainPompaBehavior : MonoBehaviour
         if (actualLevel >= 1)
             //Animation
             playBounceAnimation();
+        if (actualLevel == 1)
+        {
+            audio.pitch = UnityEngine.Random.Range(0.99f, 1.01f);
+            audio.PlayOneShot(lowHealth);
+        }
+
     }
 
     void activateInvulnerability()
